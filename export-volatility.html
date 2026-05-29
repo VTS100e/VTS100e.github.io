@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Policy Uncertainty</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #05020a; --surface-color: rgba(25, 12, 40, 0.4); --surface-border: rgba(255, 0, 170, 0.2);
+            --text-primary: #f3ecf7; --text-secondary: #a99fb6; --accent-purple: #9d4edd; --accent-violet: #be76ff; --accent-pink: #ff4da6;
+        }
+        body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-primary); min-height: 100vh; overflow-x: hidden; }
+        #network-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+        
+        .widescreen-container { position: relative; z-index: 1; width: 94vw; max-width: 1700px; margin: 0 auto; padding: 40px 0; }
+        .back-btn { font-family: 'JetBrains Mono', monospace; color: var(--accent-pink); text-decoration: none; display: inline-block; margin-bottom: 25px; font-size: 0.85rem; letter-spacing: 1px; }
+        .back-btn:hover { color: var(--accent-violet); }
+        
+        .dashboard-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: start; }
+        @media (max-width: 1024px) { .dashboard-grid { grid-template-columns: 1fr; } }
+        
+        .panel-left, .panel-right { background: var(--surface-color); border: 1px solid var(--surface-border); padding: 40px; border-radius: 14px; backdrop-filter: blur(16px); box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        
+        h1 { font-size: 2.2rem; font-weight: 600; margin: 0 0 10px 0; background: linear-gradient(to right, var(--accent-pink), var(--accent-violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -1px; }
+        .meta { font-family: 'JetBrains Mono', monospace; color: var(--accent-violet); font-size: 0.85rem; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        h3 { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; color: var(--accent-pink); text-transform: uppercase; margin-top: 30px; border-bottom: 1px solid var(--surface-border); padding-bottom: 8px; }
+        p { line-height: 1.7; color: var(--text-secondary); font-size: 1.02rem; }
+        ul { padding-left: 20px; color: var(--text-secondary); }
+        li { margin-bottom: 12px; line-height: 1.6; }
+        strong { color: var(--text-primary); }
+
+        .graphic-frame { background: rgba(5, 2, 10, 0.6); border: 1px dashed var(--accent-purple); border-radius: 8px; padding: 20px; text-align: center; min-height: 350px; display: flex; align-items: center; justify-content: center; }
+        .graphic-frame img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 5px 25px rgba(0,0,0,0.5); }
+        .frame-caption { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent-pink); margin-top: 12px; }
+        
+        .data-table { width: 100%; border-collapse: collapse; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; margin-top: 15px; }
+        .data-table th { text-align: left; padding: 10px; background: rgba(157, 78, 221, 0.15); color: var(--text-primary); border-bottom: 2px solid var(--accent-pink); }
+        .data-table td { padding: 10px; border-bottom: 1px solid var(--surface-border); color: var(--text-secondary); }
+    </style>
+</head>
+<body>
+    <canvas id="network-canvas"></canvas>
+    <div class="widescreen-container">
+        <a href="index.html" class="back-btn">&larr; SYSTEM_CORE // RETURN TO MATRIX</a>
+        
+        <div class="dashboard-grid">
+            <div class="panel-left">
+                <h1>Trade Policy Uncertainty & Export Volatility</h1> [cite: 22]
+                <div class="meta">Methodology: VECM-GARCH Cointegration Matrix</div> [cite: 23]
+                
+                <p><strong>Research Objective:</strong> Assess and track the long-run structural damage of global policy uncertainty indexes transmitted straight into emerging market export output vectors[cite: 23, 24].</p>
+                
+                <h3>Co-integrating Regimes</h3>
+                <p>Using a **Vector Error Correction Model (VECM)** integrated with an underlying GARCH framing, the analysis successfully handles system non-stationarity while extracting conditional volatility behaviors over multi-year macroeconomic cycles[cite: 23].</p>
+                
+                <h3>Key Methodological Insights</h3>
+                <ul>
+                    <li>Analyzed over **128 monthly structural observations** assessing cross-border transmission velocity[cite: 23].</li>
+                    <li>Proved a 1-unit escalation in foreign policy uncertainty registers a long-run contraction of **~52 output units** in sovereign exports ($\beta = -51.93, p < 0.001$)[cite: 24].</li>
+                    <li>Identified system corrections crawl at a slow **1.68% per month** Error Correction speed, with near **IGARCH persistence** ($\alpha + \beta = 0.94$), proving policy shocks foster highly persistent, sticky risk environments[cite: 24, 25].</li>
+                </ul>
+            </div>
+
+            <div class="panel-right">
+                <h3>System Visualizations & Outputs</h3>
+                
+                <div class="graphic-frame">
+                    <img src="vecm-garch-plot.png" alt="VECM GARCH Impulse Response Plot Output" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display:none; font-family:'JetBrains Mono', monospace; color: var(--text-secondary);">[ vecm-garch-plot.png visualization slot ]</div>
+                </div>
+                <div class="frame-caption">Fig 4.1 — Impulse Response Functions (IRF) Volatility Trajectory Persistence</div>
+
+                <h3>Variance Parameter Estimations</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Parameter Metric</th><th>Coefficient Alpha/Beta</th><th>Value</th><th>Persistence Profile</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>ARCH Effect ($\alpha$)</td><td>ARCH Term Factor</td><td>0.12</td><td>System Shock Sensitivity</td></tr>
+                        <tr><td>GARCH Factor ($\beta$)</td><td>Variance Lag Factor</td><td>0.82</td><td>Sticky Climatology Bounds</td></tr>
+                        <tr><td>Total Persistence</td><td>$\alpha + \beta$ Matrix Value</td><td>0.94</td><td>Near-IGARCH Bound Profile [cite: 25]</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('network-canvas'); const ctx = canvas.getContext('2d'); let width, height, particles = [];
+        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize); resize();
+        class Particle {
+            constructor() { this.x = Math.random() * width; this.y = Math.random() * height; this.vx = (Math.random() - 0.5) * 0.7; this.vy = (Math.random() - 0.5) * 0.7; this.radius = Math.random() * 2 + 1; }
+            update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > width) this.vx = -this.vx; if (this.y < 0 || this.y > height) this.vy = -this.vy; }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255, 0, 170, 0.25)'; ctx.fill(); }
+        }
+        function init() { for (let i = 0; i < 35; i++) particles.push(new Particle()); }
+        function animate() { ctx.clearRect(0, 0, width, height); for (let i = 0; i < particles.length; i++) { particles[i].update(); particles[i].draw(); } requestAnimationFrame(animate); }
+        init(); animate();
+    </script>
+</body>
+</html>
