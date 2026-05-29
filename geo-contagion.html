@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geoeconomic Contagion Analysis | Dayval Praski Hakim</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #07130e; --surface-color: rgba(20, 20, 30, 0.6); --surface-border: rgba(157, 78, 221, 0.3);
+            --text-primary: #f0f4f8; --text-secondary: #a0aec0; --accent-purple: #7b2cbf; --accent-pink: #ff00ff; --accent-green: #00fa9a;
+        }
+        body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-primary); min-height: 100vh; }
+        #network-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+        .container { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+        .back-btn { font-family: 'JetBrains Mono', monospace; color: var(--accent-green); text-decoration: none; display: inline-block; margin-bottom: 30px; font-size: 0.9rem; }
+        .back-btn:hover { color: var(--accent-pink); }
+        h1 { font-size: 2.2rem; background: linear-gradient(to right, var(--accent-green), var(--accent-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+        .meta { font-family: 'JetBrains Mono', monospace; color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 40px; }
+        .content-body { background: var(--surface-color); border: 1px solid var(--surface-border); padding: 40px; border-radius: 12px; backdrop-filter: blur(12px); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        p { line-height: 1.7; color: var(--text-secondary); font-size: 1.05rem; }
+        ul { padding-left: 20px; color: var(--text-secondary); }
+        li { margin-bottom: 15px; line-height: 1.6; }
+        strong { color: var(--text-primary); }
+        
+        /* Placeholder for your data visualization */
+        .chart-container { margin: 40px 0; background: rgba(0,0,0,0.5); border: 1px dashed var(--accent-purple); border-radius: 8px; padding: 40px 20px; text-align: center; }
+        .chart-placeholder-text { font-family: 'JetBrains Mono', monospace; color: var(--text-secondary); font-size: 0.9rem; }
+        .chart-caption { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent-green); margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <canvas id="network-canvas"></canvas>
+    <div class="container">
+        <a href="index.html" class="back-btn">&larr; SYSTEM_RETURN // BACK TO PORTFOLIO</a>
+        
+        <div class="content-body">
+            <h1>Geoeconomic Contagion & Volatility Clustering</h1>
+            <div class="meta">MODEL SYSTEM: 5-Parameter Bivariate Hawkes Jump-Diffusion</div>
+            
+            <p><strong>Research Objective:</strong> Strictly isolate pure geopolitical capital flight shocks from endogenous market self-excitation tendencies across international networks.</p>
+            
+            <div class="chart-container">
+                <div class="chart-placeholder-text">[ Drag or upload your Hawkes model intensity graph image here ]</div>
+                <div class="chart-caption">Fig 1.1 - Structural Bifurcation Parameters & Jump Intensities</div>
+            </div>
+
+            <h3>Key Methodological Findings</h3>
+            <ul>
+                <li>Engineered a custom 5-parameter framework processing over 15 years of institutional BIS pricing data.</li>
+                <li>Proved structural bifurcation of EMDE vulnerability; liquid frontline states absorb extreme systemic liquidity shocks, while commodity regimes remain dynamically hedged.</li>
+                <li>Validated output residuals against rigorous non-parametric placebo falsification scrubs and Ljung-Box diagnostic tests.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('network-canvas'); const ctx = canvas.getContext('2d'); let width, height, particles = [];
+        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize); resize();
+        class Particle {
+            constructor() { this.x = Math.random() * width; this.y = Math.random() * height; this.vx = (Math.random() - 0.5) * 0.8; this.vy = (Math.random() - 0.5) * 0.8; this.radius = Math.random() * 2 + 1; }
+            update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > width) this.vx = -this.vx; if (this.y < 0 || this.y > height) this.vy = -this.vy; }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fillStyle = 'rgba(157, 78, 221, 0.3)'; ctx.fill(); }
+        }
+        function init() { for (let i = 0; i < 40; i++) particles.push(new Particle()); }
+        function animate() { ctx.clearRect(0, 0, width, height); for (let i = 0; i < particles.length; i++) { particles[i].update(); particles[i].draw(); } requestAnimationFrame(animate); }
+        init(); animate();
+    </script>
+</body>
+</html>
