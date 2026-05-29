@@ -8,15 +8,17 @@
     
     <style>
         :root {
-            --bg-color: #05020a; 
-            --surface-color: rgba(25, 12, 40, 0.35);
-            --surface-border: rgba(255, 0, 170, 0.15);
-            --text-primary: #f3ecf7;
-            --text-secondary: #a99fb6;
+            --bg-color: #070a17; 
+            --surface-color: rgba(22, 28, 60, 0.45); 
+            --surface-border: rgba(255, 136, 204, 0.25); 
+            --text-primary: #f0f6fc; 
+            --text-secondary: #9ab0d0; 
+            
             --accent-purple: #9d4edd;
-            --accent-violet: #be76ff;
-            --accent-pink: #ff4da6;
-            --accent-glow: rgba(255, 77, 166, 0.2);
+            --accent-violet: #d477ff; 
+            --accent-pink: #ff88cc; 
+            --accent-glow: rgba(255, 136, 204, 0.25);
+            --accent-crystal: #77ddff;
         }
 
         body, html {
@@ -35,7 +37,6 @@
             position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; padding: 60px 40px;
         }
 
-        /* Hero Layout */
         .hero { margin-bottom: 50px; }
         h1 { 
             font-size: 3.5rem; font-weight: 600; margin: 0 0 10px 0; letter-spacing: -1.5px;
@@ -47,11 +48,10 @@
         @keyframes blink { 50% { opacity: 0; } }
 
         .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; }
-        .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; background: rgba(157, 78, 221, 0.1); border: 1px solid rgba(255, 0, 170, 0.25); color: var(--accent-violet); padding: 4px 12px; border-radius: 4px; }
+        .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; background: rgba(212, 119, 255, 0.1); border: 1px solid rgba(255, 136, 204, 0.3); color: var(--accent-pink); padding: 4px 12px; border-radius: 4px; }
 
         p.summary { font-size: 1.05rem; line-height: 1.7; color: var(--text-secondary); max-width: 900px; margin: 0; }
 
-        /* Multi-Column Split Layout */
         .split-layout {
             display: grid;
             grid-template-columns: 1fr 1.6fr;
@@ -67,17 +67,27 @@
 
         h3 { font-size: 1.3rem; font-weight: 600; color: var(--text-primary); margin-top: 0; margin-bottom: 25px; letter-spacing: -0.5px; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
         
-        /* Left Column Elements */
-        .left-col { display: flex; flex-direction: column; gap: 25px; }
-        .education-card {
+        .left-col { display: flex; flex-direction: column; gap: 40px; }
+        .info-card {
             background: var(--surface-color); border: 1px solid var(--surface-border);
             padding: 25px; border-radius: 10px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .info-card:hover {
+            border-color: var(--accent-pink);
+            box-shadow: 0 5px 20px rgba(255, 136, 204, 0.15);
         }
         .institution { color: var(--accent-pink); font-weight: 600; margin-bottom: 5px; font-size: 1.1rem; }
-        .degree { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 8px; }
+        .degree { font-size: 0.95rem; color: var(--accent-crystal); margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; }
         .details { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
 
-        /* Right Column Link Cards */
+        .btn-link {
+            display: inline-block; margin-top: 15px; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem; color: var(--accent-violet); text-transform: uppercase; text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .btn-link:hover { color: var(--accent-pink); }
+
         .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
         .project-card-link { text-decoration: none; color: inherit; display: block; }
 
@@ -113,24 +123,38 @@
 
     <div class="container">
         <div class="hero">
-            <h1>Dayval Praski Hakim // VTS100e</h1> 
+            <h1>Dayval Praski Hakim</h1>
             <h2><span id="typewriter"></span><span class="cursor"></span></h2>
             
             <div class="tech-tags">
                 <span class="tag">R</span> <span class="tag">Python</span> <span class="tag">C++</span> 
+                <span class="tag">Econometrics</span> <span class="tag">Stochastic Calculus</span>
+                <span class="tag">Time-Series</span> <span class="tag">VECM-GARCH</span>
             </div>
 
-            <p class="summary">Multidisciplinary analyst combining macroeconomic theory and international relations with quantitative methodology. Applies econometrics, mathematical modeling, and statistical analysis to assess global market drivers, integrating an International Relations background to forecast systemic risks and structural market volatility.</p>
+            <p class="summary">Multidisciplinary analyst combining macroeconomic theory with quantitative methodology. Applies econometrics, mathematical modeling, and statistical analysis to assess global market drivers, integrating an International Relations background to forecast systemic risks and structural market volatility.</p>
         </div>
 
         <div class="split-layout">
             
             <div class="left-col">
-                <h3>Background</h3>
-                <div class="education-card">
-                    <div class="institution">Airlangga University</div> 
-                    <div class="degree">Bachelor of Social in International Relations</div> 
-                    <div class="details">Majoring in International Relations with a structured minor specialization in Mathematics. Focused on cross-border capital flows, macroeconomic governance regimes, and quantitative risk estimation frameworks.</div>
+                <div>
+                    <h3>System_Core // Background</h3>
+                    <div class="info-card">
+                        <div class="institution">Airlangga University</div>
+                        <div class="degree">Bachelor of Social in International Relations</div>
+                        <div class="details">Majoring in International Relations with a structured minor specialization in Mathematics. Focused on cross-border capital flows, macroeconomic governance regimes, and quantitative risk estimation frameworks.</div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Publications // Journals</h3>
+                    <div class="info-card">
+                        <div class="institution">Your Journal Title Here</div>
+                        <div class="degree">Volume / Issue / Date</div>
+                        <div class="details">Insert a brief abstract or summary of the journal article here. Explain the methodology used and the primary conclusions drawn from your research.</div>
+                        <a href="LINK_TO_YOUR_JOURNAL_HERE" target="_blank" class="btn-link">Initialize Document &rarr;</a>
+                    </div>
                 </div>
             </div>
 
@@ -140,7 +164,7 @@
                     
                     <a href="geo-contagion.html" class="project-card-link">
                         <div class="project-card">
-                            <h4>Geoeconomic Contagion & Volatility Clustering</h4> 
+                            <h4>Geoeconomic Contagion & Volatility Clustering</h4>
                             <p>Engineered a 5-parameter Bivariate Hawkes jump-diffusion framework across 15 years of institutional BIS pricing data to separate geopolitical shocks from network feedback loops.</p>
                             <div class="action-text">Initialize Analysis &rarr;</div>
                         </div>
@@ -148,7 +172,7 @@
 
                     <a href="fx-volatility.html" class="project-card-link">
                         <div class="project-card">
-                            <h4>Continuous-Time FX Volatility Modeling</h4> 
+                            <h4>Continuous-Time FX Volatility Modeling</h4>
                             <p>Developed an extended Ornstein-Uhlenbeck SDE parsing US 10-year yields as an exogenous drift element across key ASEAN-5 currency metrics.</p>
                             <div class="action-text">Initialize Analysis &rarr;</div>
                         </div>
@@ -156,7 +180,7 @@
 
                     <a href="digital-trade.html" class="project-card-link">
                         <div class="project-card">
-                            <h4>Digital Trade & Geopolitical Regime Divergence</h4> 
+                            <h4>Digital Trade & Geopolitical Regime Divergence</h4>
                             <p>Applied high-dimensional PPMLHDFE gravity estimation across 6,960 bilateral network interactions to evaluate the friction caused by localized regulatory architecture.</p>
                             <div class="action-text">Initialize Analysis &rarr;</div>
                         </div>
@@ -164,7 +188,7 @@
 
                     <a href="export-volatility.html" class="project-card-link">
                         <div class="project-card">
-                            <h4>Trade Policy Uncertainty & Export Volatility</h4> 
+                            <h4>Trade Policy Uncertainty & Export Volatility</h4>
                             <p>Evaluated long-run foreign policy uncertainty impacts on emerging market exports using a tailored VECM-GARCH time-series architecture.</p>
                             <div class="action-text">Initialize Analysis &rarr;</div>
                         </div>
@@ -187,7 +211,6 @@
         }
         setTimeout(typeWriter, 400);
 
-        // Pink/Purple Interactive Canvas
         const canvas = document.getElementById('network-canvas'); const ctx = canvas.getContext('2d'); let width, height, particles = [];
         let mouse = { x: null, y: null, radius: 160 };
         window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
@@ -200,7 +223,7 @@
                 this.x = Math.random() * width; this.y = Math.random() * height;
                 this.vx = (Math.random() - 0.5) * 0.8; this.vy = (Math.random() - 0.5) * 0.8;
                 this.radius = Math.random() * 2 + 1;
-                const colors = ['rgba(255, 77, 166, 0.5)', 'rgba(157, 78, 221, 0.4)', 'rgba(190, 118, 255, 0.4)'];
+                const colors = ['rgba(255, 136, 204, 0.6)', 'rgba(212, 119, 255, 0.5)', 'rgba(119, 221, 255, 0.4)'];
                 this.color = colors[Math.floor(Math.random() * colors.length)];
             }
             update() {
@@ -225,7 +248,7 @@
                     let dx = particles[i].x - particles[j].x; let dy = particles[i].y - particles[j].y;
                     let dist = Math.sqrt(dx * dx + dy * dy);
                     if (dist < 130) {
-                        ctx.beginPath(); ctx.strokeStyle = `rgba(157, 78, 221, ${0.4 - dist/130})`;
+                        ctx.beginPath(); ctx.strokeStyle = `rgba(212, 119, 255, ${0.4 - dist/130})`;
                         ctx.lineWidth = 0.5; ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
                     }
                 }
@@ -233,7 +256,7 @@
                     let dx = particles[i].x - mouse.x; let dy = particles[i].y - mouse.y;
                     let dist = Math.sqrt(dx * dx + dy * dy);
                     if (dist < 160) {
-                        ctx.beginPath(); ctx.strokeStyle = `rgba(255, 77, 166, ${0.8 - dist/160})`;
+                        ctx.beginPath(); ctx.strokeStyle = `rgba(255, 136, 204, ${0.8 - dist/160})`;
                         ctx.lineWidth = 0.8; ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
                     }
                 }
