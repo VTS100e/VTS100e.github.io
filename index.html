@@ -8,23 +8,24 @@
     
     <style>
         :root {
-            --bg-color: #070a17; 
-            --surface-color: rgba(22, 28, 60, 0.45); 
-            --surface-border: rgba(255, 136, 204, 0.25); 
-            --text-primary: #f0f6fc; 
-            --text-secondary: #9ab0d0; 
-            
-            --accent-purple: #9d4edd;
-            --accent-violet: #d477ff; 
-            --accent-pink: #ff88cc; 
-            --accent-glow: rgba(255, 136, 204, 0.25);
-            --accent-crystal: #77ddff;
+            --bg-deep: #050614; 
+            --bg-glow: #1a153a; 
+            --crystal-pink: #ffa6d9; 
+            --crystal-purple: #c47aff; 
+            --crystal-blue: #88ddff; 
+            --text-primary: #ffffff; 
+            --text-secondary: #b3c2d4; 
+            --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.01));
+            --glass-border: rgba(255, 166, 217, 0.35);
+            --glass-shadow: 0 8px 32px 0 rgba(196, 122, 255, 0.15);
+            --glass-inner-glow: inset 0 0 20px rgba(255, 166, 217, 0.05);
         }
 
         body, html {
             margin: 0; padding: 0;
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
+            background: radial-gradient(circle at 50% 0%, var(--bg-glow) 0%, var(--bg-deep) 100%);
+            background-attachment: fixed;
             color: var(--text-primary);
             overflow-x: hidden; min-height: 100vh;
         }
@@ -33,31 +34,46 @@
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none;
         }
 
+        .ambient-light {
+            position: fixed; border-radius: 50%; filter: blur(120px); z-index: 0; opacity: 0.4; pointer-events: none;
+        }
+        .light-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--crystal-purple); }
+        .light-2 { bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: var(--crystal-blue); opacity: 0.2; }
+
         .container {
             position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; padding: 60px 40px;
         }
 
         .hero { margin-bottom: 50px; }
         h1 { 
-            font-size: 3.5rem; font-weight: 600; margin: 0 0 10px 0; letter-spacing: -1.5px;
-            background: linear-gradient(to right, var(--accent-pink), var(--accent-violet));
+            font-size: 3.8rem; font-weight: 600; margin: 0 0 10px 0; letter-spacing: -1.5px;
+            background: linear-gradient(to right, var(--text-primary), var(--crystal-pink), var(--crystal-purple));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 166, 217, 0.3);
         }
-        h2 { font-size: 1.15rem; font-weight: 400; color: var(--accent-pink); margin-bottom: 25px; font-family: 'JetBrains Mono', monospace; min-height: 1.5em; }
-        .cursor { display: inline-block; width: 8px; height: 1.1rem; background-color: var(--accent-violet); animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 5px; }
+        h2 { font-size: 1.15rem; font-weight: 400; color: var(--crystal-pink); margin-bottom: 25px; font-family: 'JetBrains Mono', monospace; min-height: 1.5em; text-shadow: 0 0 10px rgba(255, 166, 217, 0.5); }
+        .cursor { display: inline-block; width: 8px; height: 1.1rem; background-color: var(--crystal-blue); animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 5px; box-shadow: 0 0 10px var(--crystal-blue); }
         @keyframes blink { 50% { opacity: 0; } }
 
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; }
-        .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; background: rgba(212, 119, 255, 0.1); border: 1px solid rgba(255, 136, 204, 0.3); color: var(--accent-pink); padding: 4px 12px; border-radius: 4px; }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
+        .tag { 
+            font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid var(--crystal-purple); 
+            color: var(--crystal-blue); 
+            padding: 6px 14px; border-radius: 20px;
+            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+            box-shadow: 0 0 10px rgba(196, 122, 255, 0.2);
+        }
 
-        p.summary { font-size: 1.05rem; line-height: 1.7; color: var(--text-secondary); max-width: 900px; margin: 0; }
+        p.summary { font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); max-width: 900px; margin: 0; }
 
         .split-layout {
             display: grid;
             grid-template-columns: 1fr 1.6fr;
             gap: 60px;
             margin-top: 50px;
-            border-top: 1px solid var(--surface-border);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 40px;
         }
 
@@ -65,65 +81,75 @@
             .split-layout { grid-template-columns: 1fr; gap: 40px; }
         }
 
-        h3 { font-size: 1.3rem; font-weight: 600; color: var(--text-primary); margin-top: 0; margin-bottom: 25px; letter-spacing: -0.5px; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+        h3 { font-size: 1.3rem; font-weight: 600; color: var(--text-primary); margin-top: 0; margin-bottom: 25px; letter-spacing: 1px; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
         
         .left-col { display: flex; flex-direction: column; gap: 40px; }
         .info-card {
-            background: var(--surface-color); border: 1px solid var(--surface-border);
-            padding: 25px; border-radius: 10px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow), var(--glass-inner-glow);
+            padding: 30px; border-radius: 16px; 
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
         }
         .info-card:hover {
-            border-color: var(--accent-pink);
-            box-shadow: 0 5px 20px rgba(255, 136, 204, 0.15);
+            border-color: var(--crystal-pink);
+            box-shadow: 0 15px 40px rgba(255, 166, 217, 0.25), inset 0 0 30px rgba(255, 166, 217, 0.1);
+            transform: translateY(-2px);
         }
-        .institution { color: var(--accent-pink); font-weight: 600; margin-bottom: 5px; font-size: 1.1rem; }
-        .degree { font-size: 0.95rem; color: var(--accent-crystal); margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; }
-        .details { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
+        .institution { color: var(--crystal-pink); font-weight: 600; margin-bottom: 8px; font-size: 1.2rem; text-shadow: 0 0 15px rgba(255, 166, 217, 0.4); }
+        .degree { font-size: 0.95rem; color: var(--crystal-blue); margin-bottom: 15px; font-family: 'JetBrains Mono', monospace; }
+        .details { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
 
         .btn-link {
-            display: inline-block; margin-top: 15px; font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem; color: var(--accent-violet); text-transform: uppercase; text-decoration: none;
-            transition: color 0.2s ease;
+            display: inline-flex; align-items: center; margin-top: 20px; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem; color: var(--crystal-purple); text-transform: uppercase; text-decoration: none;
+            transition: all 0.3s ease;
         }
-        .btn-link:hover { color: var(--accent-pink); }
+        .btn-link:hover { color: var(--crystal-blue); text-shadow: 0 0 10px var(--crystal-blue); letter-spacing: 1px; }
 
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
         .project-card-link { text-decoration: none; color: inherit; display: block; }
 
         .project-card {
-            background: var(--surface-color); border: 1px solid var(--surface-border);
-            padding: 25px; border-radius: 12px; height: 100%; box-sizing: border-box;
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: var(--glass-shadow);
+            padding: 30px; border-radius: 16px; height: 100%; box-sizing: border-box;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative; display: flex; flex-direction: column; justify-content: space-between;
         }
 
         .project-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent-pink);
-            box-shadow: 0 10px 30px var(--accent-glow);
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--crystal-pink);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
+            box-shadow: 0 20px 40px rgba(196, 122, 255, 0.3), inset 0 0 20px rgba(255, 166, 217, 0.1);
         }
 
-        .project-card h4 { color: var(--text-primary); font-size: 1.15rem; margin: 0 0 12px 0; line-height: 1.4; font-weight: 600; }
-        .project-card:hover h4 { color: var(--accent-pink); }
-        .project-card p { margin: 0 0 20px 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; flex-grow: 1; }
+        .project-card h4 { color: var(--text-primary); font-size: 1.2rem; margin: 0 0 15px 0; line-height: 1.4; font-weight: 600; }
+        .project-card:hover h4 { color: var(--crystal-pink); text-shadow: 0 0 15px rgba(255, 166, 217, 0.5); }
+        .project-card p { margin: 0 0 25px 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; flex-grow: 1; }
         
         .action-text {
-            font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
-            color: var(--accent-violet); text-transform: uppercase; letter-spacing: 1px;
-            display: flex; align-items: center; gap: 5px; transition: color 0.2s ease;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+            color: var(--crystal-purple); text-transform: uppercase; letter-spacing: 1px;
+            display: flex; align-items: center; gap: 5px; transition: all 0.3s ease;
         }
-        .project-card:hover .action-text { color: var(--accent-pink); }
+        .project-card:hover .action-text { color: var(--crystal-blue); text-shadow: 0 0 10px var(--crystal-blue); }
     </style>
 </head>
 <body>
+
+    <div class="ambient-light light-1"></div>
+    <div class="ambient-light light-2"></div>
 
     <canvas id="network-canvas"></canvas>
 
     <div class="container">
         <div class="hero">
-            <h1>Dayval Praski Hakim</h1>
+            <h1>Dayval Praski Hakim // VTS100e</h1>
             <h2><span id="typewriter"></span><span class="cursor"></span></h2>
             
             <div class="tech-tags">
@@ -137,34 +163,34 @@
             
             <div class="left-col">
                 <div>
-                    <h3>Background</h3>
+                    <h3>BACKGROUND</h3>
                     <div class="info-card">
                         <div class="institution">Airlangga University</div>
                         <div class="degree">Bachelor of Social in International Relations</div>
-                        <div class="details">Majoring in International Relations with a structured minor specialization in Mathematics. Focused on cross-border capital flows, macroeconomic governance regimes, and quantitative risk estimation frameworks.</div>
+                        <div class="details">Majoring in International Relations with a structured minor specialization in Mathematics.</div>
                     </div>
                 </div>
 
                 <div>
-                    <h3>Publications </h3>
+                    <h3>PUBLICATIONS</h3>
                     <div class="info-card">
-                        <div class="institution"> Title </div>
+                        <div class="institution">Title</div>
                         <div class="degree">Volume / Issue / Date</div>
-                        <div class="details">abstract </div>
-                        <a href="LINK_TO_YOUR_JOURNAL_HERE" target="_blank" class="btn-link"> Document &rarr;</a>
+                        <div class="details">abstract.</div>
+                        <a href="LINK_TO_YOUR_JOURNAL_HERE" target="_blank" class="btn-link">DOCUMENT &rarr;</a>
                     </div>
                 </div>
             </div>
 
             <div class="right-col">
-                <h3>Quantitative Analytics & Architectures</h3>
+                <h3>QUANTITATIVE ANALYTICS & ARCHITECTURES</h3>
                 <div class="project-grid">
                     
                     <a href="geo-contagion.html" class="project-card-link">
                         <div class="project-card">
                             <h4>Geoeconomic Contagion & Volatility Clustering</h4>
                             <p>Engineered a 5-parameter Bivariate Hawkes jump-diffusion framework across 15 years of institutional BIS pricing data to separate geopolitical shocks from network feedback loops.</p>
-                            <div class="action-text"> Analysis &rarr;</div>
+                            <div class="action-text">ANALYSIS &rarr;</div>
                         </div>
                     </a>
 
@@ -172,7 +198,7 @@
                         <div class="project-card">
                             <h4>Continuous-Time FX Volatility Modeling</h4>
                             <p>Developed an extended Ornstein-Uhlenbeck SDE parsing US 10-year yields as an exogenous drift element across key ASEAN-5 currency metrics.</p>
-                            <div class="action-text"> Analysis &rarr;</div>
+                            <div class="action-text">ANALYSIS &rarr;</div>
                         </div>
                     </a>
 
@@ -180,7 +206,7 @@
                         <div class="project-card">
                             <h4>Digital Trade & Geopolitical Regime Divergence</h4>
                             <p>Applied high-dimensional PPMLHDFE gravity estimation across 6,960 bilateral network interactions to evaluate the friction caused by localized regulatory architecture.</p>
-                            <div class="action-text"> Analysis &rarr;</div>
+                            <div class="action-text">ANALYSIS &rarr;</div>
                         </div>
                     </a>
 
@@ -188,7 +214,7 @@
                         <div class="project-card">
                             <h4>Trade Policy Uncertainty & Export Volatility</h4>
                             <p>Evaluated long-run foreign policy uncertainty impacts on emerging market exports using a tailored VECM-GARCH time-series architecture.</p>
-                            <div class="action-text"> Analysis &rarr;</div>
+                            <div class="action-text">ANALYSIS &rarr;</div>
                         </div>
                     </a>
 
@@ -210,7 +236,7 @@
         setTimeout(typeWriter, 400);
 
         const canvas = document.getElementById('network-canvas'); const ctx = canvas.getContext('2d'); let width, height, particles = [];
-        let mouse = { x: null, y: null, radius: 160 };
+        let mouse = { x: null, y: null, radius: 180 };
         window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
         window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
         function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
@@ -220,41 +246,61 @@
             constructor() {
                 this.x = Math.random() * width; this.y = Math.random() * height;
                 this.vx = (Math.random() - 0.5) * 0.8; this.vy = (Math.random() - 0.5) * 0.8;
-                this.radius = Math.random() * 2 + 1;
-                const colors = ['rgba(255, 136, 204, 0.6)', 'rgba(212, 119, 255, 0.5)', 'rgba(119, 221, 255, 0.4)'];
+                this.radius = Math.random() * 2.5 + 1.5; 
+                
+                const colors = ['rgba(255, 166, 217, 0.7)', 'rgba(196, 122, 255, 0.6)', 'rgba(136, 221, 255, 0.5)', 'rgba(255, 255, 255, 0.8)'];
                 this.color = colors[Math.floor(Math.random() * colors.length)];
             }
             update() {
                 this.x += this.vx; this.y += this.vy;
                 if (this.x < 0 || this.x > width) this.vx = -this.vx;
                 if (this.y < 0 || this.y > height) this.vy = -this.vy;
+                
                 if (mouse.x != null) {
                     let dx = mouse.x - this.x; let dy = mouse.y - this.y;
                     let dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < mouse.radius) { this.x -= dx * 0.003; this.y -= dy * 0.003; }
+                    if (dist < mouse.radius) { this.x -= dx * 0.005; this.y -= dy * 0.005; }
                 }
             }
-            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fillStyle = this.color; ctx.fill(); }
+            draw() {
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y - this.radius);
+                ctx.lineTo(this.x + this.radius, this.y);
+                ctx.lineTo(this.x, this.y + this.radius);
+                ctx.lineTo(this.x - this.radius, this.y);
+                ctx.closePath();
+                
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 12; 
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                
+                ctx.shadowBlur = 0;
+            }
         }
 
-        function init() { particles = []; let count = (width * height) / 14000; for (let i = 0; i < count; i++) particles.push(new Particle()); }
+        function init() { particles = []; let count = (width * height) / 12000; for (let i = 0; i < count; i++) particles.push(new Particle()); }
         function animate() {
             ctx.clearRect(0, 0, width, height);
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update(); particles[i].draw();
+                
+
                 for (let j = i; j < particles.length; j++) {
                     let dx = particles[i].x - particles[j].x; let dy = particles[i].y - particles[j].y;
                     let dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 130) {
-                        ctx.beginPath(); ctx.strokeStyle = `rgba(212, 119, 255, ${0.4 - dist/130})`;
+                    if (dist < 140) {
+                        ctx.beginPath(); ctx.strokeStyle = `rgba(196, 122, 255, ${0.3 - dist/140})`;
                         ctx.lineWidth = 0.5; ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
                     }
                 }
+                
+
                 if (mouse.x != null) {
                     let dx = particles[i].x - mouse.x; let dy = particles[i].y - mouse.y;
                     let dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 160) {
-                        ctx.beginPath(); ctx.strokeStyle = `rgba(255, 136, 204, ${0.8 - dist/160})`;
+                    if (dist < 180) {
+                        ctx.beginPath(); ctx.strokeStyle = `rgba(255, 166, 217, ${0.5 - dist/180})`;
                         ctx.lineWidth = 0.8; ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
                     }
                 }
