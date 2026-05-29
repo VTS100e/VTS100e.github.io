@@ -8,15 +8,15 @@
     
     <style>
         :root {
-            --bg-color: #07130e; 
-            --surface-color: rgba(20, 20, 30, 0.4);
-            --surface-border: rgba(157, 78, 221, 0.2);
-            --text-primary: #f0f4f8;
-            --text-secondary: #a0aec0;
-            --accent-purple: #7b2cbf;
-            --accent-violet: #9d4edd;
-            --accent-pink: #ff00ff;
-            --accent-green: #00fa9a;
+            --bg-color: #05020a; 
+            --surface-color: rgba(25, 12, 40, 0.35);
+            --surface-border: rgba(255, 0, 170, 0.15);
+            --text-primary: #f3ecf7;
+            --text-secondary: #a99fb6;
+            --accent-purple: #9d4edd;
+            --accent-violet: #be76ff;
+            --accent-pink: #ff4da6;
+            --accent-glow: rgba(255, 77, 166, 0.2);
         }
 
         body, html {
@@ -32,91 +32,79 @@
         }
 
         .container {
-            position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 80px 20px;
+            position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; padding: 60px 40px;
         }
 
-        /* Top Hero Section */
-        .hero { margin-bottom: 40px; }
+        /* Hero Layout */
+        .hero { margin-bottom: 50px; }
         h1 { 
-            font-size: 3.5rem; font-weight: 600; margin-bottom: 5px; letter-spacing: -1px;
-            background: linear-gradient(to right, var(--accent-green), var(--accent-pink));
+            font-size: 3.5rem; font-weight: 600; margin: 0 0 10px 0; letter-spacing: -1.5px;
+            background: linear-gradient(to right, var(--accent-pink), var(--accent-violet));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        h2 { font-size: 1.2rem; font-weight: 400; color: var(--accent-green); margin-bottom: 30px; font-family: 'JetBrains Mono', monospace; min-height: 1.5em; }
-        .cursor { display: inline-block; width: 8px; height: 1.2rem; background-color: var(--accent-pink); animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 5px; }
+        h2 { font-size: 1.15rem; font-weight: 400; color: var(--accent-pink); margin-bottom: 25px; font-family: 'JetBrains Mono', monospace; min-height: 1.5em; }
+        .cursor { display: inline-block; width: 8px; height: 1.1rem; background-color: var(--accent-violet); animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 5px; }
         @keyframes blink { 50% { opacity: 0; } }
 
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
-        .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; background: rgba(123, 44, 191, 0.1); border: 1px solid var(--accent-purple); color: var(--accent-green); padding: 4px 10px; border-radius: 4px; }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; }
+        .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; background: rgba(157, 78, 221, 0.1); border: 1px solid rgba(255, 0, 170, 0.25); color: var(--accent-violet); padding: 4px 12px; border-radius: 4px; }
 
-        p.summary { font-size: 1.05rem; line-height: 1.7; color: var(--text-secondary); max-width: 800px; }
+        p.summary { font-size: 1.05rem; line-height: 1.7; color: var(--text-secondary); max-width: 900px; margin: 0; }
 
-        /* New Split Layout System */
+        /* Multi-Column Split Layout */
         .split-layout {
             display: grid;
-            grid-template-columns: 1fr 1.3fr;
-            gap: 50px;
-            margin-top: 60px;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 60px;
+            margin-top: 50px;
             border-top: 1px solid var(--surface-border);
             padding-top: 40px;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .split-layout { grid-template-columns: 1fr; gap: 40px; }
         }
 
-        h3 { font-size: 1.4rem; font-weight: 600; color: var(--text-primary); margin-top: 0; margin-bottom: 25px; letter-spacing: -0.5px; }
+        h3 { font-size: 1.3rem; font-weight: 600; color: var(--text-primary); margin-top: 0; margin-bottom: 25px; letter-spacing: -0.5px; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
         
         /* Left Column Elements */
+        .left-col { display: flex; flex-direction: column; gap: 25px; }
         .education-card {
-            background: var(--surface-color);
-            border: 1px solid var(--surface-border);
-            padding: 25px; border-radius: 10px;
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            background: var(--surface-color); border: 1px solid var(--surface-border);
+            padding: 25px; border-radius: 10px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
-        .institution { color: var(--accent-green); font-weight: 600; margin-bottom: 5px; }
-        .degree { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 5px; }
-        .details { font-size: 0.9rem; color: var(--text-secondary); }
+        .institution { color: var(--accent-pink); font-weight: 600; margin-bottom: 5px; font-size: 1.1rem; }
+        .degree { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 8px; }
+        .details { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
 
         /* Right Column Link Cards */
-        .project-list { display: flex; flex-direction: column; gap: 20px; }
-        
-        .project-card-link {
-            text-decoration: none; color: inherit; display: block;
-        }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+        .project-card-link { text-decoration: none; color: inherit; display: block; }
 
         .project-card {
-            background: var(--surface-color);
-            border: 1px solid var(--surface-border);
-            padding: 25px; border-radius: 12px;
+            background: var(--surface-color); border: 1px solid var(--surface-border);
+            padding: 25px; border-radius: 12px; height: 100%; box-sizing: border-box;
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative; overflow: hidden;
-        }
-
-        .project-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
-            background: linear-gradient(to bottom, var(--accent-purple), var(--accent-pink));
-            opacity: 0; transition: opacity 0.3s ease;
+            position: relative; display: flex; flex-direction: column; justify-content: space-between;
         }
 
         .project-card:hover {
-            transform: translateY(-3px) scale(1.01);
-            border-color: var(--accent-violet);
-            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.15);
+            transform: translateY(-4px);
+            border-color: var(--accent-pink);
+            box-shadow: 0 10px 30px var(--accent-glow);
         }
 
-        .project-card:hover::before { opacity: 1; }
-
-        .project-card h4 { color: var(--text-primary); font-size: 1.15rem; margin: 0 0 10px 0; transition: color 0.2s ease; }
-        .project-card:hover h4 { color: var(--accent-green); }
-        .project-card p { margin: 0 0 15px 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; }
+        .project-card h4 { color: var(--text-primary); font-size: 1.15rem; margin: 0 0 12px 0; line-height: 1.4; font-weight: 600; }
+        .project-card:hover h4 { color: var(--accent-pink); }
+        .project-card p { margin: 0 0 20px 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; flex-grow: 1; }
         
         .action-text {
             font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
-            color: var(--accent-pink); text-transform: uppercase; letter-spacing: 1px;
-            display: flex; align-items: center; gap: 5px;
+            color: var(--accent-violet); text-transform: uppercase; letter-spacing: 1px;
+            display: flex; align-items: center; gap: 5px; transition: color 0.2s ease;
         }
+        .project-card:hover .action-text { color: var(--accent-pink); }
     </style>
 </head>
 <body>
@@ -125,53 +113,62 @@
 
     <div class="container">
         <div class="hero">
-            <h1>Dayval Praski Hakim</h1>
+            <h1>Dayval Praski Hakim</h1> [cite: 1]
             <h2><span id="typewriter"></span><span class="cursor"></span></h2>
             
             <div class="tech-tags">
-                <span class="tag">R</span> <span class="tag">Python</span> <span class="tag">C++</span> 
-                <span class="tag">Econometrics</span> <span class="tag">Stochastic Calculus</span>
+                <span class="tag">R</span> <span class="tag">Python</span> <span class="tag">C++</span>  [cite: 33]
+                <span class="tag">Econometrics</span> <span class="tag">Stochastic Calculus</span> [cite: 32]
+                <span class="tag">Time-Series</span> <span class="tag">VECM-GARCH</span> [cite: 23, 32]
             </div>
 
-            <p class="summary">Multidisciplinary analyst combining macroeconomic theory with quantitative methodology[cite: 6]. Applies econometrics, mathematical modeling, and statistical analysis to assess global market drivers, integrating an International Relations background to forecast systemic risks.</p>
+            <p class="summary">Multidisciplinary analyst combining macroeconomic theory with quantitative methodology[cite: 6]. Applies econometrics, mathematical modeling, and statistical analysis to assess global market drivers, integrating an International Relations background to forecast systemic risks and structural market volatility[cite: 6, 7].</p>
         </div>
 
         <div class="split-layout">
             
             <div class="left-col">
-                <h3>Academic Background</h3>
+                <h3>System_Core // Background</h3>
                 <div class="education-card">
-                    <div class="institution">Airlangga University</div>
-                    <div class="degree">Bachelor of Social in International Relations</div>
-                    <div class="details">Majoring in International Relations with a minor in Mathematics.</div>
+                    <div class="institution">Airlangga University</div> [cite: 28]
+                    <div class="degree">Bachelor of Social in International Relations</div> [cite: 27]
+                    <div class="details">Majoring in International Relations with a structured minor specialization in Mathematics[cite: 29]. Focused on cross-border capital flows, macroeconomic governance regimes, and quantitative risk estimation frameworks[cite: 6, 7, 32].</div>
                 </div>
             </div>
 
             <div class="right-col">
-                <h3>Academic & Quantitative Projects</h3>
-                <div class="project-list">
+                <h3>Quantitative Analytics & Architectures</h3>
+                <div class="project-grid">
                     
                     <a href="geo-contagion.html" class="project-card-link">
                         <div class="project-card">
-                            <h4>Geoeconomic Contagion & Volatility Clustering</h4>
-                            <p>Engineered a 5-parameter Bivariate Hawkes jump-diffusion model across 15 years of institutional BIS data to isolate pure geopolitical capital flight.</p>
-                            <div class="action-text">View Full Analysis & Graphs &rarr;</div>
+                            <h4>Geoeconomic Contagion & Volatility Clustering</h4> [cite: 9]
+                            <p>Engineered a 5-parameter Bivariate Hawkes jump-diffusion framework across 15 years of institutional BIS pricing data to separate geopolitical shocks from network feedback loops[cite: 10].</p>
+                            <div class="action-text">Initialize Analysis &rarr;</div>
                         </div>
                     </a>
 
                     <a href="fx-volatility.html" class="project-card-link">
                         <div class="project-card">
-                            <h4>Continuous-Time FX Volatility Modeling</h4>
-                            <p>Developed an extended Ornstein-Uhlenbeck SDE model incorporating US 10-year yield as an exogenous drift component across ASEAN-5 currencies.</p>
-                            <div class="action-text">View Full Analysis & Graphs &rarr;</div>
+                            <h4>Continuous-Time FX Volatility Modeling</h4> [cite: 16]
+                            <p>Developed an extended Ornstein-Uhlenbeck SDE parsing US 10-year yields as an exogenous drift element across key ASEAN-5 currency metrics[cite: 17].</p>
+                            <div class="action-text">Initialize Analysis &rarr;</div>
                         </div>
                     </a>
 
                     <a href="digital-trade.html" class="project-card-link">
                         <div class="project-card">
-                            <h4>Digital Trade & Geopolitical Regime Divergence</h4>
-                            <p>Applied PPMLHDFE across 6,960 bilateral trade observations to isolate the trade effects of digital regulatory data localization.</p>
-                            <div class="action-text">View Full Analysis & Graphs &rarr;</div>
+                            <h4>Digital Trade & Geopolitical Regime Divergence</h4> [cite: 19]
+                            <p>Applied high-dimensional PPMLHDFE gravity estimation across 6,960 bilateral network interactions to evaluate the friction caused by localized regulatory architecture[cite: 20, 21].</p>
+                            <div class="action-text">Initialize Analysis &rarr;</div>
+                        </div>
+                    </a>
+
+                    <a href="export-volatility.html" class="project-card-link">
+                        <div class="project-card">
+                            <h4>Trade Policy Uncertainty & Export Volatility</h4> [cite: 22]
+                            <p>Evaluated long-run foreign policy uncertainty impacts on emerging market exports using a tailored VECM-GARCH time-series architecture[cite: 23].</p>
+                            <div class="action-text">Initialize Analysis &rarr;</div>
                         </div>
                     </a>
 
@@ -182,22 +179,19 @@
     </div>
 
     <script>
-        // Typewriter Effect
         const textToType = "Translating Global Dynamics into Actionable Quant Models.";
-        const typeSpeed = 50; let typeIndex = 0;
+        const typeSpeed = 40; let typeIndex = 0;
         function typeWriter() {
             if (typeIndex < textToType.length) {
                 document.getElementById("typewriter").innerHTML += textToType.charAt(typeIndex);
                 typeIndex++; setTimeout(typeWriter, typeSpeed);
             }
         }
-        setTimeout(typeWriter, 500);
+        setTimeout(typeWriter, 400);
 
-        // Particle Network Code
-        const canvas = document.getElementById('network-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height, particles = [];
-        let mouse = { x: null, y: null, radius: 150 };
+        // Pink/Purple Interactive Canvas
+        const canvas = document.getElementById('network-canvas'); const ctx = canvas.getContext('2d'); let width, height, particles = [];
+        let mouse = { x: null, y: null, radius: 160 };
         window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
         window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
         function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
@@ -206,9 +200,9 @@
         class Particle {
             constructor() {
                 this.x = Math.random() * width; this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 1; this.vy = (Math.random() - 0.5) * 1;
+                this.vx = (Math.random() - 0.5) * 0.8; this.vy = (Math.random() - 0.5) * 0.8;
                 this.radius = Math.random() * 2 + 1;
-                const colors = ['rgba(0, 250, 154, 0.5)', 'rgba(123, 44, 191, 0.5)', 'rgba(255, 0, 255, 0.5)'];
+                const colors = ['rgba(255, 77, 166, 0.5)', 'rgba(157, 78, 221, 0.4)', 'rgba(190, 118, 255, 0.4)'];
                 this.color = colors[Math.floor(Math.random() * colors.length)];
             }
             update() {
@@ -218,13 +212,13 @@
                 if (mouse.x != null) {
                     let dx = mouse.x - this.x; let dy = mouse.y - this.y;
                     let dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < mouse.radius) { this.x -= dx * 0.005; this.y -= dy * 0.005; }
+                    if (dist < mouse.radius) { this.x -= dx * 0.003; this.y -= dy * 0.003; }
                 }
             }
             draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fillStyle = this.color; ctx.fill(); }
         }
 
-        function init() { particles = []; let count = (width * height) / 12000; for (let i = 0; i < count; i++) particles.push(new Particle()); }
+        function init() { particles = []; let count = (width * height) / 14000; for (let i = 0; i < count; i++) particles.push(new Particle()); }
         function animate() {
             ctx.clearRect(0, 0, width, height);
             for (let i = 0; i < particles.length; i++) {
@@ -232,16 +226,16 @@
                 for (let j = i; j < particles.length; j++) {
                     let dx = particles[i].x - particles[j].x; let dy = particles[i].y - particles[j].y;
                     let dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 120) {
-                        ctx.beginPath(); ctx.strokeStyle = `rgba(157, 78, 221, ${0.6 - dist/120})`;
+                    if (dist < 130) {
+                        ctx.beginPath(); ctx.strokeStyle = `rgba(157, 78, 221, ${0.4 - dist/130})`;
                         ctx.lineWidth = 0.5; ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
                     }
                 }
                 if (mouse.x != null) {
                     let dx = particles[i].x - mouse.x; let dy = particles[i].y - mouse.y;
                     let dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 150) {
-                        ctx.beginPath(); ctx.strokeStyle = `rgba(0, 250, 154, ${1 - dist/150})`;
+                    if (dist < 160) {
+                        ctx.beginPath(); ctx.strokeStyle = `rgba(255, 77, 166, ${0.8 - dist/160})`;
                         ctx.lineWidth = 0.8; ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
                     }
                 }
