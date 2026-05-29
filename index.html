@@ -36,9 +36,14 @@
 
         .ambient-light {
             position: fixed; border-radius: 50%; filter: blur(120px); z-index: 0; opacity: 0.4; pointer-events: none;
+            animation: breathe 12s infinite ease-in-out alternate;
+        }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.15); opacity: 0.5; }
         }
         .light-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--crystal-purple); }
-        .light-2 { bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: var(--crystal-blue); opacity: 0.2; }
+        .light-2 { bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: var(--crystal-blue); opacity: 0.2; animation-delay: -6s; }
 
         .container {
             position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; padding: 60px 40px;
@@ -235,27 +240,26 @@
         }
         setTimeout(typeWriter, 400);
 
-        const canvas = document.getElementById('network-canvas'); const ctx = canvas.getContext('2d'); let width, height, particles = [];
+        const canvas = document.getElementById('network-canvas'); const ctx = canvas.getContext('2d'); 
+        let width, height, crystals = [], petals = [];
         let mouse = { x: null, y: null, radius: 180 };
         window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
         window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
         function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
         window.addEventListener('resize', resize); resize();
 
-        class Particle {
+        class Crystal {
             constructor() {
                 this.x = Math.random() * width; this.y = Math.random() * height;
                 this.vx = (Math.random() - 0.5) * 0.8; this.vy = (Math.random() - 0.5) * 0.8;
                 this.radius = Math.random() * 2.5 + 1.5; 
-                
-                const colors = ['rgba(255, 166, 217, 0.7)', 'rgba(196, 122, 255, 0.6)', 'rgba(136, 221, 255, 0.5)', 'rgba(255, 255, 255, 0.8)'];
+                const colors = ['rgba(255, 166, 217, 0.7)', 'rgba(196, 122, 255, 0.6)', 'rgba(136, 221, 255, 0.5)'];
                 this.color = colors[Math.floor(Math.random() * colors.length)];
             }
             update() {
                 this.x += this.vx; this.y += this.vy;
                 if (this.x < 0 || this.x > width) this.vx = -this.vx;
                 if (this.y < 0 || this.y > height) this.vy = -this.vy;
-                
                 if (mouse.x != null) {
                     let dx = mouse.x - this.x; let dy = mouse.y - this.y;
                     let dist = Math.sqrt(dx * dx + dy * dy);
@@ -269,39 +273,82 @@
                 ctx.lineTo(this.x, this.y + this.radius);
                 ctx.lineTo(this.x - this.radius, this.y);
                 ctx.closePath();
-                
                 ctx.fillStyle = this.color;
-                ctx.shadowBlur = 12; 
-                ctx.shadowColor = this.color;
-                ctx.fill();
-                
-                ctx.shadowBlur = 0;
+                ctx.shadowBlur = 10; ctx.shadowColor = this.color;
+                ctx.fill(); ctx.shadowBlur = 0;
             }
         }
 
-        function init() { particles = []; let count = (width * height) / 12000; for (let i = 0; i < count; i++) particles.push(new Particle()); }
+        class Petal {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = Math.random() * 0.6 + 0.3;
+                this.size = Math.random() * 6 + 3;
+                this.angle = Math.random() * Math.PI * 2;
+                this.spin = (Math.random() - 0.5) * 0.03;
+                const colors = ['rgba(255, 166, 217, 0.4)', 'rgba(255, 180, 225, 0.3)', 'rgba(224, 153, 255, 0.3)'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.flutterOffset = Math.random() * 100; 
+            }
+            update() {
+                this.x += this.vx + Math.sin((this.y + this.flutterOffset) * 0.02) * 0.5;
+                this.y += this.vy;
+                this.angle += this.spin;
+                
+                if (this.y > height + 20) { this.y = -20; this.x = Math.random() * width; }
+                if (this.x < -20) this.x = width + 20;
+                if (this.x > width + 20) this.x = -20;
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.quadraticCurveTo(this.size, -this.size, 0, -this.size * 2);
+                ctx.quadraticCurveTo(-this.size, -this.size, 0, 0);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 8; ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function init() { 
+            crystals = []; petals = []; 
+            let crystalCount = (width * height) / 12000; 
+            let petalCount = (width * height) / 15000; 
+            for (let i = 0; i < crystalCount; i++) crystals.push(new Crystal()); 
+            for (let i = 0; i < petalCount; i++) petals.push(new Petal());
+        }
+
         function animate() {
             ctx.clearRect(0, 0, width, height);
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update(); particles[i].draw();
-                
+            
+            for (let i = 0; i < petals.length; i++) {
+                petals[i].update(); petals[i].draw();
+            }
 
-                for (let j = i; j < particles.length; j++) {
-                    let dx = particles[i].x - particles[j].x; let dy = particles[i].y - particles[j].y;
+            for (let i = 0; i < crystals.length; i++) {
+                crystals[i].update(); crystals[i].draw();
+                
+                for (let j = i; j < crystals.length; j++) {
+                    let dx = crystals[i].x - crystals[j].x; let dy = crystals[i].y - crystals[j].y;
                     let dist = Math.sqrt(dx * dx + dy * dy);
                     if (dist < 140) {
                         ctx.beginPath(); ctx.strokeStyle = `rgba(196, 122, 255, ${0.3 - dist/140})`;
-                        ctx.lineWidth = 0.5; ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
+                        ctx.lineWidth = 0.5; ctx.moveTo(crystals[i].x, crystals[i].y); ctx.lineTo(crystals[j].x, crystals[j].y); ctx.stroke();
                     }
                 }
                 
-
                 if (mouse.x != null) {
-                    let dx = particles[i].x - mouse.x; let dy = particles[i].y - mouse.y;
+                    let dx = crystals[i].x - mouse.x; let dy = crystals[i].y - mouse.y;
                     let dist = Math.sqrt(dx * dx + dy * dy);
                     if (dist < 180) {
                         ctx.beginPath(); ctx.strokeStyle = `rgba(255, 166, 217, ${0.5 - dist/180})`;
-                        ctx.lineWidth = 0.8; ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+                        ctx.lineWidth = 0.8; ctx.moveTo(crystals[i].x, crystals[i].y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
                     }
                 }
             }
