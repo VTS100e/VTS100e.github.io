@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dayval Praski Hakim | Quant & Risk Analyst</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Quicksand:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">    
     <style>
         :root {
             --bg-deep: #050614; 
@@ -23,11 +22,14 @@
 
         body, html {
             margin: 0; padding: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'DM Sans', sans-serif; 
             background: radial-gradient(circle at 50% 0%, var(--bg-glow) 0%, var(--bg-deep) 100%);
             background-attachment: fixed;
             color: var(--text-primary);
             overflow-x: hidden; min-height: 100vh;
+        }
+        h1, h2, h3, h4, .institution {
+            font-family: 'Quicksand', sans-serif; 
         }
 
         #network-canvas {
@@ -51,11 +53,13 @@
 
         .hero { margin-bottom: 50px; }
         h1 { 
-            font-size: 3.8rem; font-weight: 600; margin: 0 0 10px 0; letter-spacing: -1.5px;
+            font-size: 4.2rem; 
+            font-weight: 700; margin: 0 0 10px 0; letter-spacing: -1.5px;
             background: linear-gradient(to right, var(--text-primary), var(--crystal-pink), var(--crystal-purple));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             text-shadow: 0 0 30px rgba(255, 166, 217, 0.3);
         }
+
         h2 { font-size: 1.15rem; font-weight: 400; color: var(--crystal-pink); margin-bottom: 25px; font-family: 'JetBrains Mono', monospace; min-height: 1.5em; text-shadow: 0 0 10px rgba(255, 166, 217, 0.5); }
         .cursor { display: inline-block; width: 8px; height: 1.1rem; background-color: var(--crystal-blue); animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 5px; box-shadow: 0 0 10px var(--crystal-blue); }
         @keyframes blink { 50% { opacity: 0; } }
