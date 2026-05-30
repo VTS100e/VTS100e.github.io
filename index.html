@@ -18,6 +18,7 @@
             --glass-border: rgba(255, 166, 217, 0.35);
             --glass-shadow: 0 8px 32px 0 rgba(196, 122, 255, 0.15);
             --glass-inner-glow: inset 0 0 20px rgba(255, 166, 217, 0.05);
+            
         }
 
         body, html {
@@ -147,6 +148,61 @@
             display: flex; align-items: center; gap: 5px; transition: all 0.3s ease;
         }
         .project-card:hover .action-text { color: var(--crystal-blue); text-shadow: 0 0 10px var(--crystal-blue); }
+        .contact-bar {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow), var(--glass-inner-glow);
+            padding: 10px 24px;
+            border-radius: 30px; 
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 10;
+        }
+
+        .contact-link, .location, .divider {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--crystal-purple);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .location {
+            color: var(--text-primary);
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+        }
+
+        .divider {
+            color: rgba(255, 255, 255, 0.2);
+            margin: 0 5px;
+        }
+
+        .contact-link:hover {
+            color: var(--crystal-pink);
+            text-shadow: 0 0 12px rgba(255, 166, 217, 0.6);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 900px) {
+            .contact-bar {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 30px;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                border-radius: 16px;
+                padding: 15px 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -157,6 +213,14 @@
     <canvas id="network-canvas"></canvas>
 
     <div class="container">
+        <div class="contact-bar">
+            <span class="location">Surabaya, ID</span>
+            <span class="divider">|</span>
+            <a href="mailto:leq5dayval@gmail.com" class="contact-link">Email</a>
+            <a href="https://github.com/VTS100e" target="_blank" class="contact-link">GitHub</a>
+            <a href="tel:+6287873363532" class="contact-link">Phone</a>
+        </div>
+        
         <div class="hero">
             <h1>Dayval Praski Hakim // VTS100e</h1>
             <h2><span id="typewriter"></span><span class="cursor"></span></h2>
