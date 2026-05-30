@@ -193,15 +193,20 @@
 
         @media (max-width: 900px) {
             .contact-bar {
-                position: relative;
-                top: 0;
-                right: 0;
-                margin-bottom: 30px;
-                justify-content: flex-start;
-                flex-wrap: wrap;
-                border-radius: 16px;
-                padding: 15px 20px;
-            }
+            position: fixed; 
+            top: 30px;
+            right: 30px; 
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow), var(--glass-inner-glow);
+            padding: 10px 24px;
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 100; 
         }
     </style>
 </head>
