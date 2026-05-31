@@ -24,9 +24,9 @@
         body, html {
             margin: 0; padding: 0;
             font-family: 'DM Sans', sans-serif; 
-            background: linear-gradient(-45deg, #0b0f19, #251236, #401b45, #132238);
+            background: linear-gradient(-45deg, var(--bg-deep), var(--bg-glow), #1a0b2e, var(--bg-deep));
             background-size: 400% 400%;
-            animation: elysiaFlow 15s ease infinite;
+            animation: elysiaFlow 25s ease infinite;
             background-attachment: fixed;
             color: var(--text-primary);
             overflow-x: hidden; min-height: 100vh;
@@ -404,8 +404,8 @@
 
         function init() { 
             crystals = []; petals = []; 
-            let crystalCount = (width * height) / 12000; 
-            let petalCount = (width * height) / 15000; 
+            let crystalCount = (width * height) / 7000; 
+            let petalCount = (width * height) / 8500; 
             for (let i = 0; i < crystalCount; i++) crystals.push(new Crystal()); 
             for (let i = 0; i < petalCount; i++) petals.push(new Petal());
         }
