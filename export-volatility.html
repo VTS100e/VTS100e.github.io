@@ -3,102 +3,674 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trade Policy Uncertainty</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>Trade Policy Uncertainty | Dayval Praski Hakim</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #05020a; --surface-color: rgba(25, 12, 40, 0.4); --surface-border: rgba(255, 0, 170, 0.2);
-            --text-primary: #f3ecf7; --text-secondary: #a99fb6; --accent-purple: #9d4edd; --accent-violet: #be76ff; --accent-pink: #ff4da6;
+            --bg-deep:        #040512;
+            --bg-glow:        #160f30;
+            --crystal-blue:   #88ddff;
+            --cyrene-ice:     #b8e8ff;
+            --crystal-purple: #c47aff;
+            --crystal-pink:   #ffa6d9;
+            --elysia-gold:    #f5c97a;
+            --elysia-rose:    #ff8fb1;
+            --text-primary:   #f0eeff;
+            --text-secondary: #a0b0c8;
+            --glass-bg:       linear-gradient(135deg, rgba(255,255,255,0.065), rgba(255,255,255,0.008));
+            --glass-border:   rgba(255, 166, 217, 0.28);
+            --glass-shadow:   0 8px 32px rgba(196, 122, 255, 0.1);
+            --glass-glow:     inset 0 0 20px rgba(255, 166, 217, 0.04);
         }
-        body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-primary); min-height: 100vh; overflow-x: hidden; }
-        #network-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
-        
-        .widescreen-container { position: relative; z-index: 1; width: 94vw; max-width: 1700px; margin: 0 auto; padding: 40px 0; }
-        .back-btn { font-family: 'JetBrains Mono', monospace; color: var(--accent-pink); text-decoration: none; display: inline-block; margin-bottom: 25px; font-size: 0.85rem; letter-spacing: 1px; }
-        .back-btn:hover { color: var(--accent-violet); }
-        
-        .dashboard-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: start; }
-        @media (max-width: 1024px) { .dashboard-grid { grid-template-columns: 1fr; } }
-        
-        .panel-left, .panel-right { background: var(--surface-color); border: 1px solid var(--surface-border); padding: 40px; border-radius: 14px; backdrop-filter: blur(16px); box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
-        
-        h1 { font-size: 2.2rem; font-weight: 600; margin: 0 0 10px 0; background: linear-gradient(to right, var(--accent-pink), var(--accent-violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -1px; }
-        .meta { font-family: 'JetBrains Mono', monospace; color: var(--accent-violet); font-size: 0.85rem; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
-        
-        h3 { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; color: var(--accent-pink); text-transform: uppercase; margin-top: 30px; border-bottom: 1px solid var(--surface-border); padding-bottom: 8px; }
-        p { line-height: 1.7; color: var(--text-secondary); font-size: 1.02rem; }
-        ul { padding-left: 20px; color: var(--text-secondary); }
-        li { margin-bottom: 12px; line-height: 1.6; }
-        strong { color: var(--text-primary); }
 
-        .graphic-frame { background: rgba(5, 2, 10, 0.6); border: 1px dashed var(--accent-purple); border-radius: 8px; padding: 20px; text-align: center; min-height: 350px; display: flex; align-items: center; justify-content: center; }
-        .graphic-frame img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 5px 25px rgba(0,0,0,0.5); }
-        .frame-caption { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent-pink); margin-top: 12px; }
-        
-        .data-table { width: 100%; border-collapse: collapse; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; margin-top: 15px; }
-        .data-table th { text-align: left; padding: 10px; background: rgba(157, 78, 221, 0.15); color: var(--text-primary); border-bottom: 2px solid var(--accent-pink); }
-        .data-table td { padding: 10px; border-bottom: 1px solid var(--surface-border); color: var(--text-secondary); }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body, html {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        body::after {
+            content: '';
+            position: fixed; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.04; z-index: 999; pointer-events: none;
+        }
+
+        .bg-layer {
+            position: fixed; inset: 0; z-index: -2;
+            background: linear-gradient(-45deg, #040512, #160f30, #1a0b2e, #040512);
+            background-size: 400% 400%;
+            animation: bgFlow 25s ease infinite;
+        }
+        @keyframes bgFlow {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .ambient-light {
+            position: fixed; border-radius: 50%;
+            filter: blur(130px); z-index: -1; pointer-events: none;
+            animation: breathe 14s ease-in-out infinite alternate;
+        }
+        @keyframes breathe {
+            0%   { transform: scale(1);    opacity: 0.2; }
+            100% { transform: scale(1.18); opacity: 0.42; }
+        }
+        .light-1 { top:-12%;    left:-12%;  width:52vw; height:52vw; background:var(--crystal-purple); opacity:0.28; }
+        .light-2 { bottom:-20%; right:-12%; width:60vw; height:60vw; background:var(--crystal-blue);   opacity:0.14; animation-delay:-7s; }
+        .light-3 { top:-8%;     right:10%;  width:38vw; height:38vw; background:var(--elysia-gold);    opacity:0.10; animation-delay:-3.5s; animation-duration:19s; }
+        .light-4 { bottom:5%;   left:5%;    width:30vw; height:30vw; background:var(--elysia-rose);    opacity:0.08; animation-delay:-11s;  animation-duration:22s; }
+
+        #network-canvas {
+            position: fixed; top:0; left:0;
+            width:100vw; height:100vh;
+            z-index:0; pointer-events:none;
+        }
+
+        .wrapper {
+            position: relative; z-index: 1;
+            max-width: 1440px; margin: 0 auto;
+            padding: 40px 44px 80px;
+        }
+        @media (max-width: 768px) {
+            .wrapper { padding: 26px 20px 60px; }
+        }
+
+        .top-nav {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 50px; flex-wrap: wrap; gap: 14px;
+        }
+
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase;
+            color: var(--crystal-purple); text-decoration: none;
+            padding: 9px 20px; border-radius: 30px;
+            border: 1px solid rgba(196,122,255,0.32);
+            background: rgba(196,122,255,0.06);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            color: var(--crystal-pink);
+            border-color: rgba(255,166,217,0.5);
+            box-shadow: 0 0 22px rgba(255,166,217,0.18);
+            letter-spacing: 2.5px;
+        }
+
+        .nav-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+            color: var(--elysia-gold);
+            border: 1px solid rgba(245,201,122,0.28);
+            padding: 6px 16px; border-radius: 30px;
+            background: rgba(245,201,122,0.05);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        }
+        .nav-badge::before {
+            content: ''; display: block;
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--elysia-gold);
+            box-shadow: 0 0 10px var(--elysia-gold);
+            animation: glow-pulse 2.2s ease-in-out infinite;
+        }
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.2; }
+        }
+
+        .paper-hero {
+            margin-bottom: 52px;
+            padding-bottom: 44px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            animation: fadeUp 0.7s ease both;
+        }
+
+        .paper-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.6rem, 5vw, 4.2rem);
+            font-weight: 700; line-height: 1.06; letter-spacing: -1px;
+            margin-bottom: 22px;
+            background: linear-gradient(105deg,
+                var(--text-primary)  0%,
+                var(--crystal-pink)  35%,
+                var(--elysia-gold)   65%,
+                var(--crystal-purple) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            max-width: 880px;
+        }
+
+        .paper-meta-row {
+            display: flex; align-items: center;
+            flex-wrap: wrap; gap: 0;
+            margin-bottom: 24px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.74rem;
+        }
+        .meta-pill {
+            color: var(--text-secondary); letter-spacing: 0.4px;
+            padding: 0 16px 0 0;
+        }
+        .meta-pill strong { color: var(--crystal-blue); font-weight: 400; }
+        .meta-sep { color: rgba(255,255,255,0.15); padding-right: 16px; }
+
+        .paper-abstract {
+            font-size: 1.02rem; line-height: 1.9;
+            color: var(--text-secondary); max-width: 820px;
+        }
+        .paper-abstract strong { color: var(--crystal-pink); font-weight: 500; }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 32px; align-items: start;
+        }
+        @media (max-width: 1100px) { .content-grid { grid-template-columns: 1fr; } }
+
+        .content-col { display: flex; flex-direction: column; gap: 26px; }
+        .visual-col  { display: flex; flex-direction: column; gap: 26px; }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow), var(--glass-glow);
+            padding: 34px 38px; border-radius: 20px;
+            backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+            position: relative; overflow: hidden;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+        .card::before {                              
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(to right, transparent, var(--elysia-gold), transparent);
+            opacity: 0; transition: opacity 0.4s ease;
+        }
+        .card:hover { border-color: rgba(255,166,217,0.42); }
+        .card:hover::before { opacity: 0.55; }
+
+        .card.ice::before {                          
+            background: linear-gradient(to right, transparent, var(--cyrene-ice), transparent);
+        }
+
+        .s-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.66rem; font-weight: 700;
+            color: rgba(255,255,255,0.28);
+            letter-spacing: 3.5px; text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .s-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.7rem; font-weight: 600;
+            color: var(--crystal-pink); margin-bottom: 18px;
+            line-height: 1.22;
+            text-shadow: 0 0 24px rgba(255,166,217,0.22);
+        }
+        .s-title.ice  { color: var(--cyrene-ice);    text-shadow: 0 0 24px rgba(184,232,255,0.22); }
+        .s-title.gold { color: var(--elysia-gold);   text-shadow: 0 0 24px rgba(245,201,122,0.22); }
+
+        .s-body {
+            font-size: 0.97rem; line-height: 1.85;
+            color: var(--text-secondary);
+        }
+        .s-body strong { color: var(--text-primary); font-weight: 500; }
+        .s-body em     { color: var(--crystal-blue); font-style: normal; }
+
+        .ornamented-rule {
+            display: flex; align-items: center; gap: 12px;
+            margin: 22px 0;
+        }
+        .or-line { flex: 1; height: 1px; background: rgba(255,255,255,0.07); }
+        .or-diamond {
+            width: 5px; height: 5px; transform: rotate(45deg);
+            background: var(--crystal-purple);
+            box-shadow: 0 0 8px var(--crystal-purple);
+            flex-shrink: 0;
+        }
+
+        .insight-list { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+        .insight-item { display: grid; grid-template-columns: 28px 1fr; gap: 14px; align-items: start; }
+        .i-marker {
+            width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
+            background: rgba(196,122,255,0.1);
+            border: 1px solid rgba(196,122,255,0.38);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .i-marker::after {
+            content: ''; width: 7px; height: 7px; border-radius: 50%;
+            background: var(--crystal-purple);
+            box-shadow: 0 0 9px var(--crystal-purple);
+        }
+        .i-text { font-size: 0.94rem; line-height: 1.78; color: var(--text-secondary); }
+        .i-text strong { color: var(--cyrene-ice); font-weight: 500; }
+
+        .visual-card { padding: 26px; }
+
+        .fig-corners {
+            position: relative; border-radius: 12px;
+            background: rgba(4,5,18,0.65);
+            padding: 2px;               
+        }
+        .fig-corners::before,
+        .fig-corners::after {
+            content: ''; position: absolute; z-index: 2; pointer-events: none;
+        }
+        .fig-corners::before {
+            top: 0; left: 0;
+            width: 22px; height: 22px;
+            border-top:  1.5px solid var(--crystal-blue);
+            border-left: 1.5px solid var(--crystal-blue);
+            border-radius: 2px 0 0 0;
+        }
+        .fig-corners::after {
+            bottom: 0; right: 0;
+            width: 22px; height: 22px;
+            border-bottom: 1.5px solid var(--crystal-pink);
+            border-right:  1.5px solid var(--crystal-pink);
+            border-radius: 0 0 2px 0;
+        }
+
+        .fig-inner {
+            border: 1px dashed rgba(196,122,255,0.22);
+            border-radius: 11px;
+            min-height: 260px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .fig-inner img {
+            width: 100%; height: auto; display: block;
+            border-radius: 10px; transition: transform 0.4s ease;
+        }
+        .fig-inner:hover img { transform: scale(1.015); }
+
+        .fig-placeholder {
+            display: none; 
+            flex-direction: column; align-items: center; justify-content: center;
+            gap: 14px; padding: 46px 30px; text-align: center; width: 100%;
+        }
+        .fig-placeholder svg { opacity: 0.18; }
+        .fig-placeholder-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase;
+            color: var(--text-secondary); opacity: 0.55;
+        }
+
+        .fig-caption {
+            display: flex; align-items: flex-start; gap: 10px;
+            padding: 13px 2px 0;
+        }
+        .fig-cap-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem; color: var(--crystal-pink);
+            letter-spacing: 0.8px; white-space: nowrap; flex-shrink: 0;
+        }
+        .fig-cap-text {
+            font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;
+        }
+
+        .tbl-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem; font-weight: 600;
+            color: var(--crystal-pink); margin-bottom: 4px;
+            text-shadow: 0 0 20px rgba(255,166,217,0.2);
+        }
+        .tbl-sub {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.69rem; color: var(--text-secondary);
+            letter-spacing: 0.8px; margin-bottom: 20px;
+        }
+
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table thead tr {
+            background: linear-gradient(135deg,
+                rgba(196,122,255,0.12) 0%,
+                rgba(255,166,217,0.07) 100%);
+        }
+        .data-table th {
+            text-align: left; padding: 12px 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+            color: var(--text-primary); font-weight: 700;
+            border-bottom: 1px solid rgba(196,122,255,0.38);
+        }
+        .data-table td {
+            padding: 11px 16px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.82rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+        .data-table tr:hover td { background: rgba(196,122,255,0.07); color: var(--text-primary); }
+        .data-table td.param { color: var(--cyrene-ice); }
+        .data-table td.val   { color: var(--elysia-gold); }
+        .data-table td.sig   { color: var(--crystal-purple); font-size: 0.77rem; }
+        .data-table tr:last-child td { border-bottom: none; }
+
+        footer {
+            position: relative; z-index: 1;
+            text-align: center; padding: 52px 40px 42px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 64px;
+        }
+        .footer-motif {
+            display: flex; align-items: center; justify-content: center;
+            gap: 14px; margin-bottom: 14px;
+        }
+        .footer-line  { width: 60px; height: 1px; }
+        .footer-line.warm { background: linear-gradient(to right, transparent, var(--elysia-gold)); }
+        .footer-line.cold { background: linear-gradient(to left,  transparent, var(--cyrene-ice)); }
+        .footer-diamond {
+            width: 6px; height: 6px; background: var(--crystal-pink);
+            transform: rotate(45deg); box-shadow: 0 0 10px var(--crystal-pink);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .paper-hero { animation: fadeUp 0.65s ease both; }
+        .content-col > *:nth-child(1) { animation: fadeUp 0.65s 0.12s ease both; }
+        .content-col > *:nth-child(2) { animation: fadeUp 0.65s 0.22s ease both; }
+        .visual-col  > *:nth-child(1) { animation: fadeUp 0.65s 0.18s ease both; }
+        .visual-col  > *:nth-child(2) { animation: fadeUp 0.65s 0.28s ease both; }
     </style>
 </head>
 <body>
+
+    <div class="bg-layer"></div>
+    <div class="ambient-light light-1"></div>
+    <div class="ambient-light light-2"></div>
+    <div class="ambient-light light-3"></div>
+    <div class="ambient-light light-4"></div>
     <canvas id="network-canvas"></canvas>
-    <div class="widescreen-container">
-        <a href="index.html" class="back-btn">&larr; RETURN </a>
-        
-        <div class="dashboard-grid">
-            <div class="panel-left">
-                <h1>Trade Policy Uncertainty & Export Volatility</h1> 
-                <div class="meta">Methodology: VECM-GARCH Cointegration Matrix</div> 
-                
-                <p><strong>Research Objective:</strong> Assess and track the long-run structural damage of global policy uncertainty indexes transmitted straight into emerging market export output vectors.</p>
-                
-                <h3>Co-integrating Regimes</h3>
-                <p>Using a **Vector Error Correction Model (VECM)** integrated with an underlying GARCH framing, the analysis successfully handles system non-stationarity while extracting conditional volatility behaviors over multi-year macroeconomic cycles.</p>
-                
-                <h3>Key Methodological Insights</h3>
-                <ul>
-                    <li>Analyzed over **128 monthly structural observations** assessing cross-border transmission velocity[cite: 23].</li>
-                    <li>Proved a 1-unit escalation in foreign policy uncertainty registers a long-run contraction of **~52 output units** in sovereign exports.</li>
-                    <li>Identified system corrections crawl at a slow **1.68% per month** Error Correction speed, with near **IGARCH persistence**, proving policy shocks foster highly persistent, sticky risk environments.</li>
-                </ul>
-            </div>
 
-            <div class="panel-right">
-                <h3>System Visualizations & Outputs</h3>
-                
-                <div class="graphic-frame">
-                    <img src="vecm-garch-plot.png" alt="VECM GARCH Impulse Response Plot Output" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <div style="display:none; font-family:'JetBrains Mono', monospace; color: var(--text-secondary);">[ vecm-garch-plot.png visualization slot ]</div>
+    <div class="wrapper">
+
+        <nav class="top-nav">
+            <a href="index.html" class="back-btn">← Return</a>
+            <span class="nav-badge">Working Paper · Macroeconomic Modeling</span>
+        </nav>
+
+        <header class="paper-hero">
+            <h1 class="paper-title">Trade Policy Uncertainty &amp; Export Volatility</h1>
+            <div class="paper-meta-row">
+                <span class="meta-pill"><strong>Methodology</strong> &nbsp;VECM-GARCH Cointegration Matrix</span>
+                <span class="meta-sep">·</span>
+                <span class="meta-pill"><strong>Data</strong> &nbsp;128 Monthly Structural Observations</span>
+                <span class="meta-sep">·</span>
+                <span class="meta-pill"><strong>Focus</strong> &nbsp;Emerging Market Export Output Vectors</span>
+            </div>
+            <p class="paper-abstract">
+                <strong>Research Objective:</strong> Assess and track the long-run structural damage of global policy uncertainty indexes transmitted straight into emerging market export output vectors.
+            </p>
+        </header>
+
+        <div class="content-grid">
+
+            <div class="content-col">
+
+                <div class="card">
+                    <div class="s-label">§ 01 — Framework</div>
+                    <h2 class="s-title">Co-integrating Regimes</h2>
+                    <p class="s-body">
+                        Using a <strong>Vector Error Correction Model (VECM)</strong> integrated with an underlying GARCH framing, the analysis successfully handles system non-stationarity while extracting conditional volatility behaviors over multi-year macroeconomic cycles.
+                    </p>
                 </div>
-                <div class="frame-caption">Fig 4.1 — Impulse Response Functions (IRF) Volatility Trajectory Persistence</div>
 
-                <h3>Variance Parameter Estimations</h3>
-                <table class="data-table">
-                    <thead>
-                        <tr><th>Parameter Metric</th><th>Coefficient Alpha/Beta</th><th>Value</th><th>Persistence Profile</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>ARCH Effect ($\alpha$)</td><td>ARCH Term Factor</td><td>0.12</td><td>System Shock Sensitivity</td></tr>
-                        <tr><td>GARCH Factor ($\beta$)</td><td>Variance Lag Factor</td><td>0.82</td><td>Sticky Climatology Bounds</td></tr>
-                        <tr><td>Total Persistence</td><td>$\alpha + \beta$ Matrix Value</td><td>0.94</td><td>Near-IGARCH Bound Profile</td></tr>
-                    </tbody>
-                </table>
+                <div class="card ice">
+                    <div class="s-label">§ 02 — Key Methodological Insights</div>
+                    <h2 class="s-title ice">Methodology &amp; Insights</h2>
+                    <ul class="insight-list">
+                        <li class="insight-item">
+                            <div class="i-marker"></div>
+                            <span class="i-text">Analyzed over <strong>128 monthly structural observations</strong> assessing cross-border transmission velocity.</span>
+                        </li>
+                        <li class="insight-item">
+                            <div class="i-marker"></div>
+                            <span class="i-text">Proved a 1-unit escalation in foreign policy uncertainty registers a long-run contraction of <strong>~52 output units</strong> in sovereign exports.</span>
+                        </li>
+                        <li class="insight-item">
+                            <div class="i-marker"></div>
+                            <span class="i-text">Identified system corrections crawl at a slow <strong>1.68% per month</strong> Error Correction speed, with near <strong>IGARCH persistence</strong>, proving policy shocks foster highly persistent, sticky risk environments.</span>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
+
+            <div class="visual-col">
+
+                <div class="card visual-card ice">
+                    <div class="s-label" style="margin-bottom:18px">Visualization · Fig. 4.1</div>
+                    <div class="fig-corners">
+                        <div class="fig-inner">
+                            <img src="vecm-garch-plot.png"
+                                 alt="VECM GARCH Impulse Response Plot Output"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="fig-placeholder">
+                                <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="1.5" y="1.5" width="49" height="49" rx="7" stroke="#c47aff" stroke-width="1.5"/>
+                                    <path d="M8 40 L17 26 L26 33 L35 19 L44 30" stroke="#88ddff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle cx="17" cy="26" r="2.5" fill="#ffa6d9"/>
+                                    <circle cx="35" cy="19" r="2.5" fill="#f5c97a"/>
+                                </svg>
+                                <span class="fig-placeholder-text">vecm-garch-plot.png</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fig-caption">
+                        <span class="fig-cap-label">Fig 4.1 —</span>
+                        <span class="fig-cap-text">Impulse Response Functions (IRF) Volatility Trajectory Persistence</span>
+                    </div>
+                </div>
+
+                <div class="card visual-card ice">
+                    <div class="tbl-header">Variance Parameter Estimations</div>
+                    <div class="tbl-sub">VECM-GARCH Outputs</div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter Metric</th>
+                                <th>Coefficient Alpha/Beta</th>
+                                <th>Value</th>
+                                <th>Persistence Profile</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="param">ARCH Effect (α)</td>
+                                <td class="val">ARCH Term Factor</td>
+                                <td>0.12</td>
+                                <td class="sig">System Shock Sensitivity</td>
+                            </tr>
+                            <tr>
+                                <td class="param">GARCH Factor (β)</td>
+                                <td class="val">Variance Lag Factor</td>
+                                <td>0.82</td>
+                                <td class="sig">Sticky Climatology Bounds</td>
+                            </tr>
+                            <tr>
+                                <td class="param">Total Persistence</td>
+                                <td class="val">α + β Matrix Value</td>
+                                <td>0.94</td>
+                                <td class="sig">Near-IGARCH Bound Profile</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
         </div>
     </div>
 
+    <footer>
+        <div class="footer-motif">
+            <div class="footer-line warm"></div>
+            <div class="footer-diamond"></div>
+            <div class="footer-line cold"></div>
+        </div>
+    </footer>
+
     <script>
-        const canvas = document.getElementById('network-canvas'); const ctx = canvas.getContext('2d'); let width, height, particles = [];
-        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resize); resize();
-        class Particle {
-            constructor() { this.x = Math.random() * width; this.y = Math.random() * height; this.vx = (Math.random() - 0.5) * 0.7; this.vy = (Math.random() - 0.5) * 0.7; this.radius = Math.random() * 2 + 1; }
-            update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > width) this.vx = -this.vx; if (this.y < 0 || this.y > height) this.vy = -this.vy; }
-            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255, 0, 170, 0.25)'; ctx.fill(); }
+        const canvas = document.getElementById('network-canvas');
+        const ctx    = canvas.getContext('2d');
+        let W, H, crystals = [], petals = [], stars = [];
+        let mouse = { x: null, y: null };
+
+        window.addEventListener('mousemove',  e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        window.addEventListener('mouseleave', () => { mouse.x = null;     mouse.y = null; });
+
+        function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+        window.addEventListener('resize', () => { resize(); init(); });
+        resize();
+
+        class Star {
+            constructor() {
+                this.x = Math.random() * W; this.y = Math.random() * H;
+                this.r = Math.random() * 1.2 + 0.3;
+                this.phase = Math.random() * Math.PI * 2;
+                this.speed = Math.random() * 0.018 + 0.008;
+            }
+            tick() { this.phase += this.speed; }
+            draw() {
+                const a = (Math.sin(this.phase) + 1) / 2 * 0.45 + 0.05;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255,255,255,${a})`; ctx.fill();
+            }
         }
-        function init() { for (let i = 0; i < 35; i++) particles.push(new Particle()); }
-        function animate() { ctx.clearRect(0, 0, width, height); for (let i = 0; i < particles.length; i++) { particles[i].update(); particles[i].draw(); } requestAnimationFrame(animate); }
-        init(); animate();
+
+        class Crystal {
+            constructor() {
+                this.x = Math.random() * W; this.y = Math.random() * H;
+                this.vx = (Math.random() - 0.5) * 0.65;
+                this.vy = (Math.random() - 0.5) * 0.65;
+                this.r  = Math.random() * 2.2 + 1.2;
+                const palette = [[255,166,217],[196,122,255],[136,221,255],[184,232,255]];
+                this.rgb   = palette[Math.floor(Math.random() * palette.length)];
+                this.alpha = Math.random() * 0.55 + 0.25;
+            }
+            tick() {
+                this.x += this.vx; this.y += this.vy;
+                if (this.x < 0 || this.x > W) this.vx *= -1;
+                if (this.y < 0 || this.y > H) this.vy *= -1;
+                if (mouse.x != null) {
+                    const dx = mouse.x - this.x, dy = mouse.y - this.y;
+                    const d  = Math.hypot(dx, dy);
+                    if (d < 170) { this.x -= dx * 0.006; this.y -= dy * 0.006; }
+                }
+            }
+            draw() {
+                const [r, g, b] = this.rgb;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y - this.r * 1.6);
+                ctx.lineTo(this.x + this.r, this.y);
+                ctx.lineTo(this.x, this.y + this.r * 1.6);
+                ctx.lineTo(this.x - this.r, this.y);
+                ctx.closePath();
+                ctx.fillStyle   = `rgba(${r},${g},${b},${this.alpha})`;
+                ctx.shadowBlur  = 9;
+                ctx.shadowColor = `rgba(${r},${g},${b},0.8)`;
+                ctx.fill(); ctx.shadowBlur = 0;
+            }
+        }
+
+        class Petal {
+            constructor(initial = false) { this.reset(initial); }
+            reset(initial = false) {
+                this.x = Math.random() * W;
+                this.y = initial ? Math.random() * H : -15;
+                this.vx = (Math.random() - 0.5) * 0.38;
+                this.vy = Math.random() * 0.48 + 0.18;
+                this.sz      = Math.random() * 7 + 3;
+                this.angle   = Math.random() * Math.PI * 2;
+                this.spin    = (Math.random() - 0.5) * 0.022;
+                this.flutter = Math.random() * 100;
+                this.alpha   = Math.random() * 0.3 + 0.08;
+                const palette = [[255,166,217],[255,190,225],[245,201,122],[224,153,255]];
+                this.rgb = palette[Math.floor(Math.random() * palette.length)];
+            }
+            tick() {
+                this.x += this.vx + Math.sin((this.y + this.flutter) * 0.017) * 0.38;
+                this.y += this.vy; this.angle += this.spin;
+                if (this.y > H + 20) this.reset(false);
+                if (this.x < -20) this.x = W + 20;
+                if (this.x > W + 20) this.x = -20;
+            }
+            draw() {
+                const [r, g, b] = this.rgb;
+                ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.angle);
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.quadraticCurveTo( this.sz, -this.sz, 0, -this.sz * 2);
+                ctx.quadraticCurveTo(-this.sz, -this.sz, 0, 0);
+                ctx.fillStyle   = `rgba(${r},${g},${b},${this.alpha})`;
+                ctx.shadowBlur  = 5;
+                ctx.shadowColor = `rgba(${r},${g},${b},0.5)`;
+                ctx.fill(); ctx.restore();
+            }
+        }
+
+        function init() {
+            crystals = []; petals = []; stars = [];
+            const area = W * H;
+            for (let i = 0; i < area / 3800; i++) stars.push(new Star());
+            for (let i = 0; i < area / 7200; i++) crystals.push(new Crystal());
+            for (let i = 0; i < area / 8000; i++) petals.push(new Petal(true));
+        }
+
+        function frame() {
+            ctx.clearRect(0, 0, W, H);
+            for (const s of stars)  { s.tick(); s.draw(); }
+            for (const p of petals) { p.tick(); p.draw(); }
+
+            for (let i = 0; i < crystals.length; i++) {
+                crystals[i].tick(); crystals[i].draw();
+
+                for (let j = i + 1; j < crystals.length; j++) {
+                    const dx = crystals[i].x - crystals[j].x;
+                    const dy = crystals[i].y - crystals[j].y;
+                    const d  = Math.hypot(dx, dy);
+                    if (d < 125) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(196,122,255,${0.22 * (1 - d / 125)})`;
+                        ctx.lineWidth   = 0.4;
+                        ctx.moveTo(crystals[i].x, crystals[i].y);
+                        ctx.lineTo(crystals[j].x, crystals[j].y);
+                        ctx.stroke();
+                    }
+                }
+
+                if (mouse.x != null) {
+                    const dx = crystals[i].x - mouse.x;
+                    const dy = crystals[i].y - mouse.y;
+                    const d  = Math.hypot(dx, dy);
+                    if (d < 175) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255,166,217,${0.38 * (1 - d / 175)})`;
+                        ctx.lineWidth   = 0.65;
+                        ctx.moveTo(crystals[i].x, crystals[i].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(frame);
+        }
+
+        init();
+        frame();
     </script>
 </body>
 </html>
