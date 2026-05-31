@@ -411,10 +411,12 @@
             transform: translateY(0);
         }
         .ely-emblem-wrap {
-            width: 340px; height: 340px;
-            flex-shrink: 0;
-            position: relative;
+            position: absolute;
+            right: -60px; top: 50%;
+            transform: translateY(-50%);
+            width: 540px; height: 540px;
             pointer-events: none;
+            z-index: 0;
         }
         .ely-emblem-wrap::before {
             content: '';
@@ -422,19 +424,28 @@
             background: radial-gradient(circle,
                 rgba(255,166,217,0.14) 0%,
                 rgba(245,201,122,0.07) 45%,
-                transparent 72%);
+                transparent 30%);
             border-radius: 50%;
             animation: elysiaGlow 8s ease-in-out infinite alternate;
+        }
+        @keyframes elysiaGlow {
+            0%   { opacity: 0.6; transform: scale(0.95); }
+            100% { opacity: 1;   transform: scale(1.08); }
         }
         .ely-emblem {
             width: 100%; height: 100%;
             object-fit: contain;
-            opacity: 0.22;
-            filter: saturate(0.5) brightness(0.75);
+            opacity: 0.17;
+            mix-blend-mode: screen;
+            filter: saturate(0.85) brightness(1.1);
             animation: elySpin 110s linear infinite;
         }
-        @media (max-width: 1100px) { .ely-emblem-wrap { width: 260px; height: 260px; } }
-        @media (max-width: 900px)  { .hero { flex-direction: column-reverse; } .ely-emblem-wrap { width: 180px; height: 180px; } }
+        @keyframes elySpin {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+        @media (max-width: 1200px) { .ely-emblem-wrap { width: 400px; height: 400px; right: -80px; opacity: 0.7; } }
+        @media (max-width: 900px)  { .ely-emblem-wrap { width: 280px; height: 280px; right: 50%; top: 30px; transform: translateX(50%); opacity: 0.45; } }
         @media (max-width: 600px)  { .ely-emblem-wrap { display: none; } }
     </style>
 </head>
@@ -459,6 +470,9 @@
         </div>
 
         <div class="hero">
+            <div class="emblem-wrap" aria-hidden="true">
+                <img src="emblem.png" alt="" class="emblem">
+            </div>
             <h1>Dayval Praski Hakim <small>// VTS100e</small></h1>
             
 
@@ -482,9 +496,6 @@
             </div>
 
             <p class="summary">Hallo, I'm a multidisciplinary analyst specializing in market risk and global market analysis, I integrate my background in International Relations with advanced mathematical modeling to decode complex economic drivers. My technical expertise spans high-dimensional econometrics, stochastic differential equations, and advanced time-series forecasting. But ultimately, my focus lies in translating chaotic, continuous-time or discrete data into clear, actionable architectures to navigate systemic risks, structural volatility, and geoeconomic shifts.</p>
-            <div class="emblem-wrap" aria-hidden="true">
-                <img src="emblem.png" alt="" class="emblem">
-            </div>
         </div>
 
         <div class="split-layout">
