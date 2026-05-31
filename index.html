@@ -3,258 +3,420 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dayval Praski Hakim | Quant & Risk Analyst</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Quicksand:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">    
+    <title>Dayval Praski Hakim | Quant & Risk/Market Analyst</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #050614; 
-            --bg-glow: #1a153a; 
-            --crystal-pink: #ffa6d9; 
-            --crystal-purple: #c47aff; 
-            --crystal-blue: #88ddff; 
-            --text-primary: #ffffff; 
-            --text-secondary: #b3c2d4; 
-            --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.01));
-            --glass-border: rgba(255, 166, 217, 0.35);
-            --glass-shadow: 0 8px 32px 0 rgba(196, 122, 255, 0.15);
-            --glass-inner-glow: inset 0 0 20px rgba(255, 166, 217, 0.05);
-            
+            --bg-deep: #040512;
+            --bg-glow: #160f30;
+            --crystal-blue: #88ddff;
+            --cyrene-ice: #b8e8ff;
+            --crystal-purple: #c47aff;
+            --crystal-pink: #ffa6d9;
+            --elysia-gold: #f5c97a;
+            --elysia-rose: #ff8fb1;
+            --text-primary: #f0eeff;
+            --text-secondary: #a0b0c8;
+            --glass-bg: linear-gradient(135deg, rgba(255,255,255,0.065), rgba(255,255,255,0.008));
+            --glass-border: rgba(255, 166, 217, 0.28);
+            --glass-shadow: 0 8px 32px rgba(196, 122, 255, 0.1);
+            --glass-inner-glow: inset 0 0 20px rgba(255, 166, 217, 0.04);
         }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body, html {
-            margin: 0; padding: 0;
-            font-family: 'DM Sans', sans-serif; 
-            background: linear-gradient(-45deg, var(--bg-deep), var(--bg-glow), #1a0b2e, var(--bg-deep));
-            background-size: 400% 400%;
-            animation: elysiaFlow 25s ease infinite;
-            background-attachment: fixed;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-deep);
             color: var(--text-primary);
-            overflow-x: hidden; min-height: 100vh;
-        }
-        h1, h2, h3, h4, .institution {
-            font-family: 'Quicksand', sans-serif; 
+            overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        #network-canvas {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none;
-        }
-
-        .ambient-light {
-            position: fixed; border-radius: 50%; filter: blur(120px); z-index: 0; opacity: 0.4; pointer-events: none;
-            animation: breathe 12s infinite ease-in-out alternate;
-        }
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.15); opacity: 0.5; }
-        }
-        .light-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--crystal-purple); }
-        .light-2 { bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: var(--crystal-blue); opacity: 0.2; animation-delay: -6s; }
-
-        .container {
-            position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; padding: 60px 40px;
-        }
-
-        .hero { margin-bottom: 50px; }
-        h1 { 
-            font-size: 4.2rem; 
-            font-weight: 700; margin: 0 0 10px 0; letter-spacing: -1.5px;
-            background: linear-gradient(to right, var(--text-primary), var(--crystal-pink), var(--crystal-purple));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(255, 166, 217, 0.3);
-        }
-
-        h2 { font-size: 1.15rem; font-weight: 400; color: var(--crystal-pink); margin-bottom: 25px; font-family: 'JetBrains Mono', monospace; min-height: 1.5em; text-shadow: 0 0 10px rgba(255, 166, 217, 0.5); }
-        .cursor { display: inline-block; width: 8px; height: 1.1rem; background-color: var(--crystal-blue); animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 5px; box-shadow: 0 0 10px var(--crystal-blue); }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
-        .tag { 
-            font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; 
-            background: rgba(255, 255, 255, 0.05); 
-            border: 1px solid var(--crystal-purple); 
-            color: var(--crystal-blue); 
-            padding: 6px 14px; border-radius: 20px;
-            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-            box-shadow: 0 0 10px rgba(196, 122, 255, 0.2);
-        }
-
-        p.summary { font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); max-width: 900px; margin: 0; text-align: justify; }
-
-        .split-layout {
-            display: grid;
-            grid-template-columns: 1fr 1.6fr;
-            gap: 60px;
-            margin-top: 50px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 40px;
-        }
-
-        @media (max-width: 1024px) {
-            .split-layout { grid-template-columns: 1fr; gap: 40px; }
-        }
-
-        h3 { font-size: 1.3rem; font-weight: 600; color: var(--text-primary); margin-top: 0; margin-bottom: 25px; letter-spacing: 1px; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
-        
-        .left-col { display: flex; flex-direction: column; gap: 40px; }
-        .info-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow), var(--glass-inner-glow);
-            padding: 30px; border-radius: 16px; 
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            transition: all 0.4s ease;
-        }
-        .info-card:hover {
-            border-color: var(--crystal-pink);
-            box-shadow: 0 15px 40px rgba(255, 166, 217, 0.25), inset 0 0 30px rgba(255, 166, 217, 0.1);
-            transform: translateY(-2px);
-        }
-        .institution { color: var(--crystal-pink); font-weight: 600; margin-bottom: 8px; font-size: 1.2rem; text-shadow: 0 0 15px rgba(255, 166, 217, 0.4); }
-        .degree { font-size: 0.95rem; color: var(--crystal-blue); margin-bottom: 15px; font-family: 'JetBrains Mono', monospace; }
-        .details { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
-
-        .btn-link {
-            display: inline-flex; align-items: center; margin-top: 20px; font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem; color: var(--crystal-purple); text-transform: uppercase; text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        .btn-link:hover { color: var(--crystal-blue); text-shadow: 0 0 10px var(--crystal-blue); letter-spacing: 1px; }
-
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
-        .project-card-link { text-decoration: none; color: inherit; display: block; }
-
-        .project-card {
-            background: var(--glass-bg);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: var(--glass-shadow);
-            padding: 30px; border-radius: 16px; height: 100%; box-sizing: border-box;
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative; display: flex; flex-direction: column; justify-content: space-between;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: var(--crystal-pink);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
-            box-shadow: 0 20px 40px rgba(196, 122, 255, 0.3), inset 0 0 20px rgba(255, 166, 217, 0.1);
-        }
-
-        .project-card h4 { color: var(--text-primary); font-size: 1.2rem; margin: 0 0 15px 0; line-height: 1.4; font-weight: 600; }
-        .project-card:hover h4 { color: var(--crystal-pink); text-shadow: 0 0 15px rgba(255, 166, 217, 0.5); }
-        .project-card p { margin: 0 0 25px 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; flex-grow: 1; }
-        
-        .action-text {
-            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
-            color: var(--crystal-purple); text-transform: uppercase; letter-spacing: 1px;
-            display: flex; align-items: center; gap: 5px; transition: all 0.3s ease;
-        }
-        .project-card:hover .action-text { color: var(--crystal-blue); text-shadow: 0 0 10px var(--crystal-blue); }
-        .contact-bar {
-            position: absolute;
-            top: 40px;
-            right: 40px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow), var(--glass-inner-glow);
-            padding: 10px 24px;
-            border-radius: 30px; 
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 10;
-        }
-
-        .contact-link, .location, .divider {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--crystal-purple);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            letter-spacing: 0.5px;
-        }
-
-        .location {
-            color: var(--text-primary);
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 600;
-        }
-
-        .divider {
-            color: rgba(255, 255, 255, 0.2);
-            margin: 0 5px;
-        }
-
-        .contact-link:hover {
-            color: var(--crystal-pink);
-            text-shadow: 0 0 12px rgba(255, 166, 217, 0.6);
-            transform: translateY(-1px);
-        }
-
-        @media (max-width: 900px) {
-            .contact-bar {
-            position: relative; 
-            top: 20px;
-            right: auto; 
-            left: 50%; 
-            transform: translateX(-50%);
-            width: max-content; 
-            max-width: 95%; 
-            justify-content: center;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 10px; 
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow), var(--glass-inner-glow);
-            padding: 10px 18px;
-            border-radius: 30px; 
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.04;
             z-index: 999;
+            pointer-events: none;
         }
-        @keyframes elysiaFlow {
+
+        .bg-layer {
+            position: fixed; inset: 0; z-index: -2;
+            background: linear-gradient(-45deg, #040512, #160f30, #1a0b2e, #040512);
+            background-size: 400% 400%;
+            animation: bgFlow 25s ease infinite;
+        }
+        @keyframes bgFlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+
+        .ambient-light {
+            position: fixed; border-radius: 50%;
+            filter: blur(130px); z-index: -1;
+            pointer-events: none;
+            animation: breathe 14s ease-in-out infinite alternate;
+        }
+        @keyframes breathe {
+            0% { transform: scale(1); opacity: 0.2; }
+            100% { transform: scale(1.18); opacity: 0.42; }
+        }
+        .light-1 { top: -12%; left: -12%; width: 52vw; height: 52vw; background: var(--crystal-purple); opacity: 0.28; }
+        .light-2 { bottom: -20%; right: -12%; width: 60vw; height: 60vw; background: var(--crystal-blue); opacity: 0.14; animation-delay: -7s; }
+        .light-3 { top: -8%; right: 10%; width: 38vw; height: 38vw; background: var(--elysia-gold); opacity: 0.1; animation-delay: -3.5s; animation-duration: 19s; }
+        .light-4 { bottom: 5%; left: 5%; width: 30vw; height: 30vw; background: var(--elysia-rose); opacity: 0.08; animation-delay: -11s; animation-duration: 22s; }
+
+        #network-canvas {
+            position: fixed; top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 0; pointer-events: none;
+        }
+
+        .container {
+            position: relative; z-index: 1;
+            max-width: 1400px; margin: 0 auto;
+            padding: 60px 40px 80px;
+        }
+
+        .contact-bar {
+            position: absolute;
+            top: 40px; right: 40px;
+            display: flex; align-items: center; gap: 12px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow), var(--glass-inner-glow);
+            padding: 10px 22px; border-radius: 30px;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            z-index: 10;
+        }
+        .contact-link, .contact-loc, .contact-div {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.74rem; letter-spacing: 0.5px;
+            color: var(--crystal-purple); text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .contact-loc { color: var(--text-primary); font-family: 'DM Sans', sans-serif; font-weight: 500; }
+        .contact-div { color: rgba(255,255,255,0.18); }
+        .contact-link:hover { color: var(--crystal-pink); text-shadow: 0 0 12px rgba(255,166,217,0.6); }
+
+        @media (max-width: 900px) {
+            .contact-bar {
+                position: relative; top: auto; right: auto;
+                left: 50%; transform: translateX(-50%);
+                width: max-content; max-width: 95%;
+                justify-content: center;
+                margin-bottom: 30px; flex-wrap: wrap;
+            }
+            .container { padding: 30px 20px 60px; }
+        }
+
+        .hero { margin-bottom: 55px; padding-top: 15px; }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5.2rem; font-weight: 700;
+            line-height: 1.02; letter-spacing: -1.5px;
+            margin-bottom: 4px;
+            background: linear-gradient(105deg,
+                var(--text-primary) 0%,
+                var(--crystal-pink) 38%,
+                var(--elysia-gold) 62%,
+                var(--crystal-purple) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        h1 small {
+            font-size: 0.52em; font-weight: 400;
+            opacity: 0.5; letter-spacing: 0;
+            font-style: italic;
+        }
+
+        .hero-sub {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem; color: var(--crystal-pink);
+            margin-bottom: 22px; min-height: 1.6em;
+            text-shadow: 0 0 14px rgba(255,166,217,0.4);
+        }
+        .cursor {
+            display: inline-block; width: 8px; height: 1rem;
+            background: var(--crystal-blue); vertical-align: middle; margin-left: 4px;
+            animation: blink 1s step-end infinite;
+            box-shadow: 0 0 10px var(--crystal-blue);
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .epigraph-wrap {
+            display: flex; align-items: stretch; gap: 0;
+            margin-bottom: 28px;
+            max-width: 680px;
+        }
+        .epigraph-accent {
+            width: 3px; border-radius: 4px;
+            background: linear-gradient(to bottom, var(--elysia-gold), var(--crystal-purple));
+            margin-right: 18px; flex-shrink: 0;
+        }
+        .epigraph {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic; font-size: 1.15rem;
+            color: rgba(245, 201, 122, 0.6);
+            line-height: 1.65; padding: 2px 0;
+        }
+        .epigraph em {
+            font-style: normal;
+            color: rgba(184, 232, 255, 0.7);
+        }
+
+        /* Duality label */
+        .duality-tag {
+            display: inline-flex; align-items: center; gap: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 2.5px;
+            margin-bottom: 20px; color: rgba(255,255,255,0.3);
+        }
+        .duality-tag .elysia { color: rgba(245, 201, 122, 0.6); }
+        .duality-tag .cyrene { color: rgba(184, 232, 255, 0.6); }
+        .duality-tag span.sep { color: rgba(255,255,255,0.15); font-size: 0.8em; }
+
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 26px; }
+        .tag {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.77rem;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(196, 122, 255, 0.45);
+            color: var(--crystal-blue);
+            padding: 5px 14px; border-radius: 20px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 0 10px rgba(196,122,255,0.18);
+            transition: all 0.3s ease;
+        }
+        .tag:hover {
+            border-color: var(--crystal-blue);
+            box-shadow: 0 0 18px rgba(136,221,255,0.45);
+            transform: translateY(-1px);
+        }
+
+        p.summary {
+            font-size: 1.02rem; line-height: 1.88;
+            color: var(--text-secondary);
+            max-width: 860px; text-align: justify;
+        }
+
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.7fr;
+            gap: 60px; margin-top: 55px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        @media (max-width: 1024px) {
+            .split-layout { grid-template-columns: 1fr; gap: 40px; }
+            h1 { font-size: 3.6rem; }
+        }
+
+        h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem; font-weight: 700;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 18px;
+            letter-spacing: 3.5px; text-transform: uppercase;
+        }
+
+        .left-col { display: flex; flex-direction: column; gap: 38px; }
+
+        .info-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow), var(--glass-inner-glow);
+            padding: 26px 28px; border-radius: 16px;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+            position: relative; overflow: hidden;
+        }
+        .info-card::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(to right, transparent, var(--elysia-gold), transparent);
+            opacity: 0; transition: opacity 0.4s ease;
+        }
+        .info-card:hover { border-color: rgba(255,166,217,0.5); transform: translateY(-2px); }
+        .info-card:hover::before { opacity: 0.7; }
+
+        .institution {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem; font-weight: 600;
+            color: var(--crystal-pink); margin-bottom: 5px;
+            text-shadow: 0 0 14px rgba(255,166,217,0.3);
+        }
+        .degree {
+            font-size: 0.85rem; color: var(--crystal-blue);
+            margin-bottom: 12px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .details { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.65; }
+
+        .wip-badge {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.67rem; letter-spacing: 2.5px;
+            color: var(--elysia-gold);
+            border: 1px solid rgba(245,201,122,0.32);
+            padding: 3px 10px; border-radius: 20px;
+            background: rgba(245,201,122,0.06);
+            margin-bottom: 14px;
+        }
+        .wip-badge::before {
+            content: ''; display: block;
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--elysia-gold);
+            box-shadow: 0 0 8px var(--elysia-gold);
+            animation: glow-pulse 2.2s ease-in-out infinite;
+        }
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.25; }
+        }
+
+        .btn-link {
+            display: inline-flex; align-items: center; margin-top: 18px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem; color: var(--crystal-purple);
+            text-transform: uppercase; text-decoration: none;
+            letter-spacing: 1px; transition: all 0.3s ease;
+        }
+        .btn-link:hover { color: var(--crystal-blue); text-shadow: 0 0 10px var(--crystal-blue); letter-spacing: 2px; }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
+            gap: 18px;
+        }
+        .project-card-link { text-decoration: none; color: inherit; display: block; height: 100%; }
+
+        .project-card {
+            background: var(--glass-bg);
+            border: 1px solid rgba(255,255,255,0.09);
+            box-shadow: var(--glass-shadow);
+            padding: 26px 28px; border-radius: 16px;
+            height: 100%; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative; display: flex; flex-direction: column;
+            justify-content: space-between; overflow: hidden;
+        }
+        .project-card::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(to right, transparent, var(--cyrene-ice), transparent);
+            opacity: 0; transition: opacity 0.4s ease;
+        }
+        .project-card::after {
+            content: ''; position: absolute;
+            bottom: -30px; right: -30px;
+            width: 80px; height: 80px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,166,217,0.12), transparent 70%);
+            opacity: 0; transition: opacity 0.5s ease;
+        }
+        .project-card:hover { transform: translateY(-6px) scale(1.01); border-color: rgba(255,166,217,0.35); }
+        .project-card:hover::before { opacity: 1; }
+        .project-card:hover::after { opacity: 1; }
+
+        .project-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--text-primary); font-size: 1.22rem;
+            margin: 0 0 10px 0; line-height: 1.35; font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        .project-card:hover h4 { color: var(--crystal-pink); text-shadow: 0 0 15px rgba(255,166,217,0.35); }
+        .project-card p { margin: 0 0 20px 0; font-size: 0.89rem; color: var(--text-secondary); line-height: 1.72; flex-grow: 1; }
+
+        .action-text {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.76rem;
+            color: var(--crystal-purple); text-transform: uppercase; letter-spacing: 2px;
+            display: flex; align-items: center; gap: 5px;
+            transition: all 0.3s ease;
+        }
+        .project-card:hover .action-text { color: var(--crystal-blue); text-shadow: 0 0 10px var(--crystal-blue); letter-spacing: 3px; }
+
+        footer {
+            position: relative; z-index: 1;
+            text-align: center; padding: 50px 40px 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .footer-motif {
+            display: flex; align-items: center; justify-content: center;
+            gap: 14px; margin-bottom: 14px;
+        }
+        .footer-line {
+            width: 60px; height: 1px;
+        }
+        .footer-line.warm { background: linear-gradient(to right, transparent, var(--elysia-gold)); }
+        .footer-line.cold { background: linear-gradient(to left, transparent, var(--cyrene-ice)); }
+        .footer-diamond {
+            width: 6px; height: 6px;
+            background: var(--crystal-pink);
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px var(--crystal-pink);
+        }
+        .footer-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic; font-size: 0.95rem;
+            color: rgba(255,255,255,0.18);
+        }
+        .footer-text .elysia { color: rgba(245,201,122,0.45); }
+        .footer-text .cyrene { color: rgba(184,232,255,0.45); }
     </style>
 </head>
 <body>
 
+    <div class="bg-layer"></div>
     <div class="ambient-light light-1"></div>
     <div class="ambient-light light-2"></div>
+    <div class="ambient-light light-3"></div>
+    <div class="ambient-light light-4"></div>
 
     <canvas id="network-canvas"></canvas>
 
     <div class="container">
-        <<div class="contact-bar">
-        <span class="location">Surabaya, ID</span>
-        <span class="divider">|</span>
-        <a href="mailto:leq5dayval@gmail.com" class="contact-link">Email</a>
-        <a href="https://github.com/VTS100e" target="_blank" class="contact-link">GitHub</a>
-        <a href="tel:+6287873363532" class="contact-link">Phone</a>
-    </div>
-        
+
+        <div class="contact-bar">
+            <span class="contact-loc">Surabaya, ID</span>
+            <span class="contact-div">|</span>
+            <a href="mailto:leq5dayval@gmail.com" class="contact-link">Email</a>
+            <a href="https://github.com/VTS100e" target="_blank" class="contact-link">GitHub</a>
+            <a href="tel:+6287873363532" class="contact-link">Phone</a>
+        </div>
+
         <div class="hero">
-            <h1>Dayval Praski Hakim // VTS100e</h1>
-            <h2><span id="typewriter"></span><span class="cursor"></span></h2>
-            
+            <h1>Dayval Praski Hakim <small>// VTS100e</small></h1>
+
+            <div class="hero-sub">
+                <span id="typewriter"></span><span class="cursor"></span>
+            </div>
+
+            <div class="epigraph-wrap">
+                <div class="epigraph-accent"></div>
+                <p class="epigraph">
+                    To exist beautifully, even within the eye of the storm —<br>
+                    that is the only equation <em>worth solving.</em>
+                </p>
+            </div>
+
             <div class="tech-tags">
-                <span class="tag">R</span> <span class="tag">Python</span> <span class="tag">C++</span> 
+                <span class="tag">R</span>
+                <span class="tag">Python</span>
+                <span class="tag">C++</span>
             </div>
 
             <p class="summary">Hallo, I'm a multidisciplinary analyst specializing in market risk and global market analysis, I integrate my background in International Relations with advanced mathematical modeling to decode complex economic drivers. My technical expertise spans high-dimensional econometrics, stochastic differential equations, and advanced time-series forecasting. But ultimately, my focus lies in translating chaotic, continuous-time or discrete data into clear, actionable architectures to navigate systemic risks, structural volatility, and geoeconomic shifts.</p>
         </div>
 
         <div class="split-layout">
-            
+
             <div class="left-col">
                 <div>
-                    <h3>BACKGROUND</h3>
+                    <h3>Background</h3>
                     <div class="info-card">
                         <div class="institution">Airlangga University</div>
                         <div class="degree">Bachelor of Social in International Relations</div>
@@ -263,23 +425,23 @@
                 </div>
 
                 <div>
-                    <h3>PUBLICATIONS</h3>
+                    <h3>Publications</h3>
                     <div class="info-card">
-                        <div class="institution">Title</div>
-                        <div class="degree">Volume / Issue / Date</div>
-                        <div class="details">abstract.</div>
-                        <a href="LINK_TO_YOUR_JOURNAL_HERE" target="_blank" class="btn-link">DOCUMENT &rarr;</a>
+                        <div class="wip-badge">IN PREPARATION</div>
+                        <div class="institution">Manuscript in Progress</div>
+                        <div class="degree">Target Journal · 2025–2026</div>
+                        <div class="details">Research currently being developed for peer-reviewed submission. Check back for updates.</div>
                     </div>
                 </div>
             </div>
 
             <div class="right-col">
-                <h3>QUANTITATIVE ANALYTICS & ARCHITECTURES</h3>
+                <h3>Quantitative Analytics &amp; Architectures</h3>
                 <div class="project-grid">
-                    
+
                     <a href="geo-contagion.html" class="project-card-link">
                         <div class="project-card">
-                            <h4>Geoeconomic Contagion & Volatility Clustering</h4>
+                            <h4>Geoeconomic Contagion &amp; Volatility Clustering</h4>
                             <p>Engineered a 5-parameter Bivariate Hawkes jump-diffusion framework across 15 years of institutional BIS pricing data to separate geopolitical shocks from network feedback loops.</p>
                             <div class="action-text">ANALYSIS &rarr;</div>
                         </div>
@@ -295,7 +457,7 @@
 
                     <a href="digital-trade.html" class="project-card-link">
                         <div class="project-card">
-                            <h4>Digital Trade & Geopolitical Regime Divergence</h4>
+                            <h4>Digital Trade &amp; Geopolitical Regime Divergence</h4>
                             <p>Applied high-dimensional PPMLHDFE gravity estimation across 6,960 bilateral network interactions to evaluate the friction caused by localized regulatory architecture.</p>
                             <div class="action-text">ANALYSIS &rarr;</div>
                         </div>
@@ -303,7 +465,7 @@
 
                     <a href="export-volatility.html" class="project-card-link">
                         <div class="project-card">
-                            <h4>Trade Policy Uncertainty & Export Volatility</h4>
+                            <h4>Trade Policy Uncertainty &amp; Export Volatility</h4>
                             <p>Evaluated long-run foreign policy uncertainty impacts on emerging market exports using a tailored VECM-GARCH time-series architecture.</p>
                             <div class="action-text">ANALYSIS &rarr;</div>
                         </div>
@@ -315,132 +477,197 @@
         </div>
     </div>
 
+    <footer>
+        <div class="footer-motif">
+            <div class="footer-line warm"></div>
+            <div class="footer-diamond"></div>
+            <div class="footer-line cold"></div>
+        </div>
+
+    </footer>
+
     <script>
-        const textToType = "Translating Global Dynamics into Actionable Quant Models.";
-        const typeSpeed = 40; let typeIndex = 0;
+        const text = "Translating Global Dynamics into Actionable Models.";
+        let idx = 0;
         function typeWriter() {
-            if (typeIndex < textToType.length) {
-                document.getElementById("typewriter").innerHTML += textToType.charAt(typeIndex);
-                typeIndex++; setTimeout(typeWriter, typeSpeed);
+            if (idx < text.length) {
+                document.getElementById("typewriter").textContent += text[idx++];
+                setTimeout(typeWriter, 42);
             }
         }
-        setTimeout(typeWriter, 400);
+        setTimeout(typeWriter, 500);
 
-        const canvas = document.getElementById('network-canvas'); const ctx = canvas.getContext('2d'); 
-        let width, height, crystals = [], petals = [];
-        let mouse = { x: null, y: null, radius: 180 };
-        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
-        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
-        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resize); resize();
+        const canvas = document.getElementById('network-canvas');
+        const ctx = canvas.getContext('2d');
+        let W, H, crystals = [], petals = [], stars = [];
+        let mouse = { x: null, y: null };
+
+        window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+
+        function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+        window.addEventListener('resize', () => { resize(); init(); });
+        resize();
+
+        class Star {
+            constructor() {
+                this.x = Math.random() * W;
+                this.y = Math.random() * H;
+                this.r = Math.random() * 1.2 + 0.3;
+                this.phase = Math.random() * Math.PI * 2;
+                this.speed = Math.random() * 0.018 + 0.008;
+            }
+            tick() { this.phase += this.speed; }
+            draw() {
+                const a = (Math.sin(this.phase) + 1) / 2 * 0.45 + 0.05;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255,255,255,${a})`;
+                ctx.fill();
+            }
+        }
 
         class Crystal {
             constructor() {
-                this.x = Math.random() * width; this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.8; this.vy = (Math.random() - 0.5) * 0.8;
-                this.radius = Math.random() * 2.5 + 1.5; 
-                const colors = ['rgba(255, 166, 217, 0.7)', 'rgba(196, 122, 255, 0.6)', 'rgba(136, 221, 255, 0.5)'];
-                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.x = Math.random() * W;
+                this.y = Math.random() * H;
+                this.vx = (Math.random() - 0.5) * 0.65;
+                this.vy = (Math.random() - 0.5) * 0.65;
+                this.r = Math.random() * 2.2 + 1.2;
+                const palette = [
+                    [255, 166, 217],  
+                    [196, 122, 255],  
+                    [136, 221, 255],  
+                    [184, 232, 255],  
+                ];
+                this.rgb = palette[Math.floor(Math.random() * palette.length)];
+                this.alpha = Math.random() * 0.55 + 0.25;
             }
-            update() {
+            tick() {
                 this.x += this.vx; this.y += this.vy;
-                if (this.x < 0 || this.x > width) this.vx = -this.vx;
-                if (this.y < 0 || this.y > height) this.vy = -this.vy;
+                if (this.x < 0 || this.x > W) this.vx *= -1;
+                if (this.y < 0 || this.y > H) this.vy *= -1;
                 if (mouse.x != null) {
-                    let dx = mouse.x - this.x; let dy = mouse.y - this.y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < mouse.radius) { this.x -= dx * 0.005; this.y -= dy * 0.005; }
+                    const dx = mouse.x - this.x, dy = mouse.y - this.y;
+                    const d = Math.hypot(dx, dy);
+                    if (d < 170) { this.x -= dx * 0.006; this.y -= dy * 0.006; }
                 }
             }
             draw() {
+                const [r, g, b] = this.rgb;
                 ctx.beginPath();
-                ctx.moveTo(this.x, this.y - this.radius);
-                ctx.lineTo(this.x + this.radius, this.y);
-                ctx.lineTo(this.x, this.y + this.radius);
-                ctx.lineTo(this.x - this.radius, this.y);
+                ctx.moveTo(this.x, this.y - this.r * 1.6);
+                ctx.lineTo(this.x + this.r, this.y);
+                ctx.lineTo(this.x, this.y + this.r * 1.6);
+                ctx.lineTo(this.x - this.r, this.y);
                 ctx.closePath();
-                ctx.fillStyle = this.color;
-                ctx.shadowBlur = 10; ctx.shadowColor = this.color;
-                ctx.fill(); ctx.shadowBlur = 0;
+                ctx.fillStyle = `rgba(${r},${g},${b},${this.alpha})`;
+                ctx.shadowBlur = 9;
+                ctx.shadowColor = `rgba(${r},${g},${b},0.8)`;
+                ctx.fill();
+                ctx.shadowBlur = 0;
             }
         }
 
         class Petal {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.4;
-                this.vy = Math.random() * 0.6 + 0.3;
-                this.size = Math.random() * 6 + 3;
-                this.angle = Math.random() * Math.PI * 2;
-                this.spin = (Math.random() - 0.5) * 0.03;
-                const colors = ['rgba(255, 166, 217, 0.4)', 'rgba(255, 180, 225, 0.3)', 'rgba(224, 153, 255, 0.3)'];
-                this.color = colors[Math.floor(Math.random() * colors.length)];
-                this.flutterOffset = Math.random() * 100; 
+            constructor(initial = false) {
+                this.reset(initial);
             }
-            update() {
-                this.x += this.vx + Math.sin((this.y + this.flutterOffset) * 0.02) * 0.5;
+            reset(initial = false) {
+                this.x = Math.random() * W;
+                this.y = initial ? Math.random() * H : -15;
+                this.vx = (Math.random() - 0.5) * 0.38;
+                this.vy = Math.random() * 0.48 + 0.18;
+                this.sz = Math.random() * 7 + 3;
+                this.angle = Math.random() * Math.PI * 2;
+                this.spin = (Math.random() - 0.5) * 0.022;
+                this.flutter = Math.random() * 100;
+                this.alpha = Math.random() * 0.3 + 0.08;
+                const palette = [
+                    [255, 166, 217],  
+                    [255, 190, 225],  
+                    [245, 201, 122],  
+                    [224, 153, 255],  
+                ];
+                this.rgb = palette[Math.floor(Math.random() * palette.length)];
+            }
+            tick() {
+                this.x += this.vx + Math.sin((this.y + this.flutter) * 0.017) * 0.38;
                 this.y += this.vy;
                 this.angle += this.spin;
-                
-                if (this.y > height + 20) { this.y = -20; this.x = Math.random() * width; }
-                if (this.x < -20) this.x = width + 20;
-                if (this.x > width + 20) this.x = -20;
+                if (this.y > H + 20) this.reset(false);
+                if (this.x < -20) this.x = W + 20;
+                if (this.x > W + 20) this.x = -20;
             }
             draw() {
+                const [r, g, b] = this.rgb;
                 ctx.save();
                 ctx.translate(this.x, this.y);
                 ctx.rotate(this.angle);
                 ctx.beginPath();
                 ctx.moveTo(0, 0);
-                ctx.quadraticCurveTo(this.size, -this.size, 0, -this.size * 2);
-                ctx.quadraticCurveTo(-this.size, -this.size, 0, 0);
-                ctx.fillStyle = this.color;
-                ctx.shadowBlur = 8; ctx.shadowColor = this.color;
+                ctx.quadraticCurveTo(this.sz, -this.sz, 0, -this.sz * 2);
+                ctx.quadraticCurveTo(-this.sz, -this.sz, 0, 0);
+                ctx.fillStyle = `rgba(${r},${g},${b},${this.alpha})`;
+                ctx.shadowBlur = 5;
+                ctx.shadowColor = `rgba(${r},${g},${b},0.5)`;
                 ctx.fill();
                 ctx.restore();
             }
         }
 
-        function init() { 
-            crystals = []; petals = []; 
-            let crystalCount = (width * height) / 7000; 
-            let petalCount = (width * height) / 8500; 
-            for (let i = 0; i < crystalCount; i++) crystals.push(new Crystal()); 
-            for (let i = 0; i < petalCount; i++) petals.push(new Petal());
+        function init() {
+            crystals = []; petals = []; stars = [];
+            const area = W * H;
+            for (let i = 0; i < area / 3800; i++) stars.push(new Star());
+            for (let i = 0; i < area / 7200; i++) crystals.push(new Crystal());
+            for (let i = 0; i < area / 8000; i++) petals.push(new Petal(true));
         }
 
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            
-            for (let i = 0; i < petals.length; i++) {
-                petals[i].update(); petals[i].draw();
-            }
+        function frame() {
+            ctx.clearRect(0, 0, W, H);
+
+            for (const s of stars) { s.tick(); s.draw(); }
+            for (const p of petals) { p.tick(); p.draw(); }
 
             for (let i = 0; i < crystals.length; i++) {
-                crystals[i].update(); crystals[i].draw();
-                
-                for (let j = i; j < crystals.length; j++) {
-                    let dx = crystals[i].x - crystals[j].x; let dy = crystals[i].y - crystals[j].y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 140) {
-                        ctx.beginPath(); ctx.strokeStyle = `rgba(196, 122, 255, ${0.3 - dist/140})`;
-                        ctx.lineWidth = 0.5; ctx.moveTo(crystals[i].x, crystals[i].y); ctx.lineTo(crystals[j].x, crystals[j].y); ctx.stroke();
+                crystals[i].tick();
+                crystals[i].draw();
+
+                for (let j = i + 1; j < crystals.length; j++) {
+                    const dx = crystals[i].x - crystals[j].x;
+                    const dy = crystals[i].y - crystals[j].y;
+                    const d = Math.hypot(dx, dy);
+                    if (d < 125) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(196,122,255,${0.22 * (1 - d / 125)})`;
+                        ctx.lineWidth = 0.4;
+                        ctx.moveTo(crystals[i].x, crystals[i].y);
+                        ctx.lineTo(crystals[j].x, crystals[j].y);
+                        ctx.stroke();
                     }
                 }
-                
+
                 if (mouse.x != null) {
-                    let dx = crystals[i].x - mouse.x; let dy = crystals[i].y - mouse.y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 180) {
-                        ctx.beginPath(); ctx.strokeStyle = `rgba(255, 166, 217, ${0.5 - dist/180})`;
-                        ctx.lineWidth = 0.8; ctx.moveTo(crystals[i].x, crystals[i].y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+                    const dx = crystals[i].x - mouse.x;
+                    const dy = crystals[i].y - mouse.y;
+                    const d = Math.hypot(dx, dy);
+                    if (d < 175) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255,166,217,${0.38 * (1 - d / 175)})`;
+                        ctx.lineWidth = 0.65;
+                        ctx.moveTo(crystals[i].x, crystals[i].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
                     }
                 }
             }
-            requestAnimationFrame(animate);
+
+            requestAnimationFrame(frame);
         }
-        init(); animate();
+
+        init();
+        frame();
     </script>
 </body>
 </html>
