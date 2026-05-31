@@ -24,7 +24,9 @@
         body, html {
             margin: 0; padding: 0;
             font-family: 'DM Sans', sans-serif; 
-            background: radial-gradient(circle at 50% 0%, var(--bg-glow) 0%, var(--bg-deep) 100%);
+            background: linear-gradient(-45deg, #0b0f19, #251236, #401b45, #132238);
+            background-size: 400% 400%;
+            animation: elysiaFlow 15s ease infinite;
             background-attachment: fixed;
             color: var(--text-primary);
             overflow-x: hidden; min-height: 100vh;
@@ -213,7 +215,12 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             z-index: 999;
-    }
+        }
+        @keyframes elysiaFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
     </style>
 </head>
 <body>
