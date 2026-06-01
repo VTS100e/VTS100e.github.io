@@ -121,6 +121,18 @@
             box-shadow: 0 0 10px var(--elysia-gold);
             animation: glow-pulse 2.2s ease-in-out infinite;
         }
+        
+        .nav-badge.done {
+            color: var(--cyrene-ice);
+            border-color: rgba(184, 232, 255, 0.28);
+            background: rgba(184, 232, 255, 0.05);
+        }
+        .nav-badge.done::before {
+            background: var(--cyrene-ice);
+            box-shadow: 0 0 10px var(--cyrene-ice);
+            animation: none; 
+        }
+        
         @keyframes glow-pulse {
             0%, 100% { opacity: 1; }
             50%       { opacity: 0.2; }
